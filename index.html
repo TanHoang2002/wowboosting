@@ -1,0 +1,1521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<link rel="icon" href="data:," />
+<title>GegeTeam — WoW Forever Boosting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Lora:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a0e1a;
+    --bg2:#0f1524;
+    --panel:#131c30;
+    --panel2:#1a2742;
+    --panel3:#223354;
+    --line:#2b3d63;
+    --line-soft:#22304e;
+    --violet:#f0762a;
+    --violet-bright:#e8b84a;
+    --violet-deep:#c85a1a;
+    --green:#e8b84a;
+    --green2:#f0762a;
+    --gold:#e8b84a;
+    --gold-dim:#c99b2e;
+    --fox:#f0762a;
+    --fox-deep:#c85a1a;
+    --ink:#f6f1e7;
+    --ink-dim:#c3c9d8;
+    --ink-faint:#8b96ad;
+    --alliance:#4a90d9;
+    --horde:#d94a3d;
+    --ok:#8fd95e;
+    --err:#ff7a6b;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);background-image:radial-gradient(900px 420px at 85% -80px,rgba(240,118,42,.10),transparent 60%),radial-gradient(700px 380px at -120px 30%,rgba(232,184,74,.05),transparent 60%);color:var(--ink);font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.55;font-variant-numeric:lining-nums}
+  h1,h2,h3{font-family:"Lora",Georgia,"Times New Roman",serif;letter-spacing:.01em;font-variant-numeric:lining-nums}
+  img{display:block;max-width:100%}
+  a{color:var(--gold)}
+  button{font:inherit;cursor:pointer;color:inherit}
+  :focus-visible{outline:2px solid var(--violet-bright);outline-offset:2px}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:40;
+    display:flex;align-items:center;gap:12px 16px;flex-wrap:wrap;
+    padding:12px 22px;background:rgba(10,14,26,.97);backdrop-filter:blur(8px);
+    border-bottom:2px solid rgba(240,118,42,.55);
+  }
+  .brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;flex:0 1 auto;min-width:0;position:relative;z-index:1}
+  .brand img{width:40px;height:40px;border-radius:50%;border:2px solid var(--fox);background:#000;object-fit:cover}
+  .brand .bname{font-family:"Lora",Georgia,serif;font-weight:700;font-size:19px;line-height:1.05;letter-spacing:.01em}
+  .brand .bsub{font-size:11px;color:var(--gold);letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+  .searchbox{flex:1 1 240px;max-width:560px;min-width:0;position:relative;z-index:2}
+  .searchbox svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--ink-faint);pointer-events:none;z-index:3}
+  .searchbox input{
+    width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--ink);
+    padding:11px 14px 11px 42px;min-height:46px;font:inherit;font-size:15px;
+    position:relative;z-index:2;text-overflow:ellipsis;
+  }
+  .searchbox input::placeholder{color:var(--ink-faint)}
+  .searchbox input:focus{border-color:var(--violet);outline:none;box-shadow:0 0 0 2px rgba(240,118,42,.28)}
+  .lang-switch{display:flex;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px;flex:0 0 auto}
+  .lang-switch button{border:0;background:transparent;color:var(--ink-dim);padding:7px 13px;min-height:38px;border-radius:999px;font-weight:700;font-size:13.5px}
+  .lang-switch button[aria-pressed="true"]{background:linear-gradient(135deg,var(--fox),var(--fox-deep));color:#fff}
+
+  /* ---------- hero band ---------- */
+  .band{position:relative;overflow:hidden;border-bottom:1px solid var(--line-soft)}
+  .band-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%;opacity:.5}
+  .band::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,14,26,.94) 30%,rgba(10,14,26,.55) 70%,rgba(10,14,26,.35)),linear-gradient(180deg,rgba(10,14,26,.35),var(--bg) 96%)}
+  .band-inner{position:relative;z-index:2;width:min(1340px,100%);margin:0 auto;padding:52px 22px 40px}
+  .band-kicker{color:var(--gold);font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:12.5px;margin:0 0 10px}
+  .band-slogan{font-family:"Lora",Georgia,serif;font-size:clamp(19px,2.6vw,27px);font-weight:700;color:var(--fox);margin:0 0 10px;line-height:1.25;text-shadow:0 2px 14px rgba(240,118,42,.35)}
+  .band-slogan{display:flex;align-items:center;gap:12px}
+  .band-slogan img{width:38px;height:38px;border-radius:50%;border:2px solid var(--fox);object-fit:cover;flex:0 0 auto}
+  .band h1{font-size:clamp(32px,4.6vw,50px);line-height:1.06;margin:0 0 12px;font-weight:900}
+  .band p.lede{max-width:640px;font-size:17.5px;color:#d8d8e0;margin:0}
+  .band-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .band-tags span{background:rgba(20,20,27,.85);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;color:var(--ink-dim)}
+  .band-tags span b{color:var(--ink)}
+
+  .wrap{width:min(1340px,100%);margin:0 auto;padding:0 22px}
+
+  /* ---------- catalog layout ---------- */
+  .catalog-layout{display:grid;grid-template-columns:204px minmax(0,1fr);gap:30px;padding:30px 0 6px;align-items:start}
+  .sidebar{position:sticky;top:78px}
+  .sidebar .side-label{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 10px}
+  .side-list{display:flex;flex-direction:column;gap:2px}
+  .side-list button{
+    text-align:left;background:transparent;border:0;border-bottom:1px solid var(--line-soft);
+    padding:11px 10px;min-height:44px;font-weight:600;font-size:15.5px;color:var(--ink-dim);
+    display:flex;justify-content:space-between;align-items:center;gap:8px;border-radius:6px 6px 0 0;
+  }
+  .side-list button:hover{color:var(--ink)}
+  .side-list button[aria-pressed="true"]{color:#fff;background:rgba(240,118,42,.14);border-bottom-color:var(--fox);border-left:3px solid var(--fox)}
+  .side-list button .cnt{font-size:12px;color:var(--ink-faint);font-weight:700}
+  .side-list button[aria-pressed="true"] .cnt{color:var(--gold)}
+
+  .cat-section{margin-bottom:36px}
+  .cat-section h2{font-size:clamp(22px,3vw,28px);font-weight:800;margin:0 0 16px;display:flex;align-items:center;gap:11px}
+  .cat-section h2::before,.sec-head h2::before{content:"";width:32px;height:32px;border-radius:50%;background:url(assets/logo.png) center/cover;border:2px solid var(--fox);flex:0 0 auto;box-shadow:0 0 0 3px rgba(240,118,42,.18)}
+  .sec-head h2{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:16px}
+  .p-card{
+    position:relative;
+    background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line-soft);border-top:4px solid var(--fox);border-radius:6px 18px 14px 14px;overflow:hidden;
+    display:flex;flex-direction:column;text-align:left;padding:0;color:var(--ink);width:100%;
+    transition:border-color .15s ease,transform .15s ease,box-shadow .15s ease;
+  }
+  .p-card::after{content:"";position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 26px 26px 0;border-color:transparent var(--gold) transparent transparent;opacity:.9;pointer-events:none}
+  .p-card:hover{border-color:var(--fox);border-top-color:var(--gold);transform:translateY(-2px);box-shadow:0 10px 28px rgba(240,118,42,.22)}
+  .p-card .art{height:186px;width:100%;object-fit:cover;object-position:center}
+  .p-card .fox-badge{position:absolute;top:156px;left:12px;width:34px;height:34px;border-radius:50%;border:2px solid var(--fox);object-fit:cover;background:#000;box-shadow:0 4px 10px rgba(0,0,0,.45);z-index:2}
+  .p-card .cbody{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1}
+  .p-card h3{font-size:17.5px;margin:0 0 8px;font-weight:800;line-height:1.25;padding-bottom:7px;border-bottom:2px solid rgba(232,184,74,.45)}
+  .p-card ul{list-style:none;margin:0 0 16px;padding:0}
+  .p-card ul li{font-size:13.5px;color:var(--ink-dim);padding-left:14px;position:relative;margin-bottom:3px}
+  .p-card ul li::before{content:"";position:absolute;left:0;top:.52em;width:6px;height:6px;border-radius:50%;background:var(--fox)}
+  .p-card .cfoot{margin-top:auto;display:flex;justify-content:flex-end}
+  .order-btn{
+    background:linear-gradient(135deg,var(--fox),var(--fox-deep));color:#fff;border:0;border-radius:9px;font-weight:700;font-size:14.5px;
+    padding:10px 18px;min-height:42px;display:inline-flex;align-items:center;gap:7px;box-shadow:0 4px 14px rgba(240,118,42,.3);
+  }
+  .order-btn:hover{background:linear-gradient(135deg,var(--gold),var(--fox));color:#1c1206}
+  .no-results{color:var(--ink-faint);font-size:15.5px;padding:22px;border:1px dashed var(--line);border-radius:var(--radius);text-align:center}
+
+  /* ---------- trust / steps ---------- */
+  section.block{padding:34px 0 6px}
+  .sec-head{margin-bottom:20px}
+  .sec-head h2{font-size:clamp(24px,3.4vw,32px);margin:0 0 6px;font-weight:800}
+  .sec-head h2 .accent{color:var(--fox)}
+  .sec-head p{margin:0;color:var(--ink-dim);max-width:660px}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .trust-card{background:var(--panel);border:1px solid var(--line-soft);border-radius:var(--radius);padding:20px 18px}
+  .trust-card .ticon{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;margin-bottom:12px;background:rgba(240,118,42,.12);border:1px solid rgba(232,184,74,.4);color:var(--gold)}
+  .trust-card h3{font-size:16.5px;margin:0 0 6px}
+  .trust-card p{margin:0;font-size:14.5px;color:var(--ink-dim)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .step{background:var(--panel);border:1px solid var(--line-soft);border-radius:var(--radius);padding:18px}
+  .step .num{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--fox),var(--fox-deep));color:#fff;display:grid;place-items:center;font-weight:900;margin-bottom:10px;box-shadow:0 4px 12px rgba(240,118,42,.3)}
+  .step h3{font-size:16px;margin:0 0 5px}
+  .step p{margin:0;font-size:14px;color:var(--ink-dim)}
+
+  /* ---------- detail view ---------- */
+  .crumbs{display:flex;align-items:center;gap:10px;padding:22px 0 4px;flex-wrap:wrap}
+  .back-btn{
+    display:inline-flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line);
+    color:var(--ink);border-radius:9px;padding:9px 15px;min-height:42px;font-weight:700;font-size:14.5px;
+  }
+  .back-btn:hover{border-color:var(--fox)}
+  .crumbs .crumb-path{color:var(--ink-faint);font-size:14px}
+  .crumbs .crumb-path b{color:var(--ink-dim);font-weight:600}
+  .detail-title{font-size:clamp(28px,4.4vw,44px);font-weight:900;margin:8px 0 20px;line-height:1.1}
+  .detail-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) 348px;gap:20px;align-items:start;padding-bottom:10px}
+
+  .d-banner{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line-soft)}
+  .d-banner img{width:100%;height:340px;object-fit:cover;object-position:center}
+  .d-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,26,0) 40%,rgba(10,14,26,.85))}
+  .d-tags{position:absolute;left:14px;bottom:14px;z-index:2;display:flex;flex-direction:column;gap:7px;align-items:flex-start}
+  .d-tags span{background:linear-gradient(135deg,var(--fox),var(--fox-deep));color:#fff;font-weight:700;font-size:13.5px;padding:6px 12px;border-radius:7px;box-shadow:0 3px 10px rgba(0,0,0,.35)}
+  .d-flex{margin-top:14px;background:var(--panel);border:1px solid var(--line-soft);border-radius:var(--radius);padding:14px 16px}
+  .d-flex b{display:block;font-size:16.5px}
+  .d-flex span{font-size:14px;color:var(--ink-dim)}
+  .d-col h2{font-size:23px;font-weight:800;margin:26px 0 10px;display:flex;align-items:center;gap:10px}
+  .d-col h2::before{content:"";width:26px;height:26px;border-radius:50%;background:url(assets/logo.png) center/cover;border:2px solid var(--fox);flex:0 0 auto}
+  .d-col h2:first-child{margin-top:0}
+  .d-col p.desc{color:var(--ink-dim);margin:0;font-size:15.5px}
+  .get-list{list-style:none;margin:0;padding:0;counter-reset:get}
+  .get-list li{display:flex;gap:12px;align-items:flex-start;padding:7px 0;font-size:15.5px;color:var(--ink)}
+  .get-list li .n{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:rgba(240,118,42,.14);border:1px solid rgba(232,184,74,.5);display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--gold)}
+  .addon-list{list-style:none;margin:0;padding:0}
+  .addon-list li{padding:6px 0 6px 16px;position:relative;font-size:15px;color:var(--ink-dim)}
+  .addon-list li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--fox)}
+  .addon-list li b{color:var(--ink)}
+
+  .req-table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden;font-size:14.5px}
+  .req-table th{text-align:left;background:var(--panel2);color:var(--ink);padding:10px 14px;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+  .req-table th:last-child,.req-table td:last-child{text-align:right}
+  .req-table td{padding:8px 14px;border-top:1px solid var(--line-soft);color:var(--ink-dim)}
+  .req-table td:last-child{color:var(--gold);font-weight:700;white-space:nowrap}
+  .dungeon-pick{max-height:308px;overflow-y:auto;border:1px solid var(--line);border-radius:9px;padding:4px;background:var(--bg2)}
+  .dungeon-pick .check-row{padding:7px 8px;min-height:40px;font-size:14.5px}
+  .dungeon-pick .dlvl{color:var(--gold);font-weight:700;font-size:13.5px;white-space:nowrap}
+
+  /* ---------- form ---------- */
+  .form-panel{background:var(--panel);border:1px solid var(--line-soft);border-radius:var(--radius);padding:20px}
+  .field{margin-bottom:17px}
+  .field:last-child{margin-bottom:2px}
+  .field label,.field .flabel{display:block;font-weight:700;font-size:14.5px;margin-bottom:8px;color:var(--ink)}
+  .field .hint{font-weight:400;color:var(--ink-faint);font-size:13px}
+  input[type="number"],input[type="text"],select,textarea{
+    width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:9px;color:var(--ink);
+    padding:11px 12px;min-height:48px;font:inherit;font-size:15.5px;
+  }
+  textarea{min-height:82px;resize:vertical}
+  input[type="range"].lvl-range{
+    -webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;border:0;border-radius:0;
+    padding:0;margin:4px 0 0;min-height:0;cursor:pointer;box-shadow:none;
+  }
+  input[type="range"].lvl-range:focus{box-shadow:none;outline:none}
+  input[type="range"].lvl-range:focus-visible{outline:2px solid var(--violet-bright);outline-offset:2px}
+  input[type="range"].lvl-range::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:var(--panel3)}
+  input[type="range"].lvl-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--fox);border:2px solid var(--gold);margin-top:-7px;box-shadow:0 2px 8px rgba(240,118,42,.5)}
+  input[type="range"].lvl-range::-moz-range-track{height:6px;border-radius:999px;background:var(--panel3)}
+  input[type="range"].lvl-range::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--fox);border:2px solid var(--gold);box-shadow:0 2px 8px rgba(240,118,42,.5)}
+  input:focus,select:focus,textarea:focus{border-color:var(--violet);outline:none;box-shadow:0 0 0 2px rgba(240,118,42,.28)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .fixed-target{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px dashed var(--line);border-radius:9px;padding:11px 12px;min-height:48px;font-weight:700}
+  .fixed-target span{color:var(--ink-faint);font-weight:500;font-size:13.5px}
+  .seg{display:flex;gap:8px;flex-wrap:wrap}
+  .seg button{flex:1 1 auto;min-height:48px;padding:10px 12px;border-radius:9px;background:var(--bg2);border:1px solid var(--line);color:var(--ink-dim);font-weight:700;font-size:15px}
+  .seg button[aria-pressed="true"]{border-color:var(--fox);color:#fff;background:rgba(240,118,42,.2)}
+  .seg button.f-alliance[aria-pressed="true"]{border-color:var(--alliance);color:#8fc0f5;background:rgba(74,144,217,.13)}
+  .seg button.f-horde[aria-pressed="true"]{border-color:var(--horde);color:#f59a8f;background:rgba(217,74,61,.13)}
+  .field .error{display:none;color:var(--err);font-size:13.5px;margin-top:6px;font-weight:600}
+  .field.invalid .error{display:block}
+  .field.invalid input{border-color:var(--err)}
+  .check-list{display:flex;flex-direction:column;gap:2px}
+  .check-row,.radio-row{
+    display:flex;align-items:center;gap:11px;width:100%;text-align:left;background:transparent;border:0;
+    padding:9px 6px;min-height:44px;border-radius:8px;font-size:15px;color:var(--ink-dim);font-weight:600;
+  }
+  .check-row:hover,.radio-row:hover{background:var(--panel2);color:var(--ink)}
+  .box{flex:0 0 auto;width:21px;height:21px;border-radius:6px;border:1.5px solid var(--ink-faint);display:grid;place-items:center;color:#fff;font-size:13px;font-weight:900}
+  .radio-dot{flex:0 0 auto;width:21px;height:21px;border-radius:50%;border:1.5px solid var(--ink-faint);display:grid;place-items:center}
+  .radio-dot::after{content:"";width:11px;height:11px;border-radius:50%;background:transparent}
+  .check-row[aria-checked="true"]{color:var(--ink)}
+  .check-row[aria-checked="true"] .box{background:var(--fox);border-color:var(--fox)}
+  .radio-row[aria-checked="true"]{color:var(--ink)}
+  .radio-row[aria-checked="true"] .radio-dot{border-color:var(--fox)}
+  .radio-row[aria-checked="true"] .radio-dot::after{background:var(--fox)}
+
+  /* ---------- order panel ---------- */
+  .order-panel{
+    position:sticky;top:78px;border-radius:16px;padding:20px;color:#fff;
+    background:linear-gradient(170deg,#1b2a4a 0%,#121c31 55%,#0d1526 100%);
+    border:2px solid var(--fox);
+    box-shadow:0 18px 44px rgba(240,118,42,.22),inset 0 0 0 1px rgba(232,184,74,.35);
+  }
+  .op-brand{display:flex;align-items:center;gap:11px;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid rgba(232,184,74,.35)}
+  .op-brand img{width:44px;height:44px;border-radius:50%;border:2px solid var(--fox);object-fit:cover;background:#000}
+  .op-brand .op-bname{font-family:"Lora",Georgia,serif;font-weight:700;font-size:17px;line-height:1.1;color:#fff}
+  .op-brand .op-bsub{font-size:11px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+  .order-panel h3{margin:0 0 14px;font-size:19px;font-weight:800}
+  .op-label{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);margin:0 0 8px}
+  .stepper{display:flex;align-items:center;gap:8px;margin-bottom:18px}
+  .stepper button{
+    width:46px;height:46px;border-radius:9px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);
+    color:#fff;font-size:21px;font-weight:800;display:grid;place-items:center;
+  }
+  .stepper button:hover{background:rgba(255,255,255,.22)}
+  .stepper button:disabled{opacity:.4;cursor:default}
+  .stepper .val{flex:1;text-align:center;font-size:19px;font-weight:800;background:rgba(0,0,0,.18);border-radius:9px;padding:10px 0}
+  .speed-list{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+  .speed-row{
+    display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1px solid rgba(255,255,255,.25);
+    background:rgba(0,0,0,.14);border-radius:9px;padding:11px 12px;min-height:46px;color:#fff;font-weight:700;font-size:15px;
+  }
+  .speed-row .radio-dot{border-color:rgba(255,255,255,.6)}
+  .speed-row[aria-checked="true"]{background:rgba(255,255,255,.16);border-color:#fff}
+  .speed-row[aria-checked="true"] .radio-dot{border-color:#fff}
+  .speed-row[aria-checked="true"] .radio-dot::after{background:#fff}
+  .op-share{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.25);border-radius:9px;padding:11px 12px;margin-bottom:18px;
+  }
+  .op-share strong{display:block;font-size:15.5px}
+  .op-share span{font-size:13px;color:rgba(255,255,255,.8)}
+  .switch{flex:0 0 auto;width:56px;height:32px;border-radius:999px;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.3);position:relative;padding:0}
+  .switch::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#cfc8e8;transition:left .15s ease,background .15s ease}
+  .switch[aria-checked="true"]{background:var(--fox);border-color:var(--gold)}
+  .switch[aria-checked="true"]::after{left:27px;background:#fff}
+  .op-sum{border-top:1px solid rgba(255,255,255,.25);padding-top:12px;margin-bottom:6px}
+  .op-sum ul{list-style:none;margin:0;padding:0}
+  .op-sum li{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:14px;border-bottom:1px dashed rgba(255,255,255,.18)}
+  .op-sum li span:first-child{color:rgba(255,255,255,.72)}
+  .op-sum li span:last-child{font-weight:700;text-align:right}
+  .op-sum .empty{color:rgba(255,255,255,.72);font-size:14px;margin:0}
+  .op-total{background:rgba(240,118,42,.14);border:1px solid rgba(232,184,74,.45);border-radius:10px;padding:13px 14px;margin:14px 0 10px}
+  .op-total .t-label{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75);margin:0 0 4px}
+  .op-total p{margin:0;font-size:17px;font-weight:800;line-height:1.35}
+  .op-pay{font-size:13.5px;color:rgba(255,255,255,.85);margin:0 0 14px}
+  .op-pay b{color:#fff}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;min-height:50px;padding:12px 20px;border-radius:10px;font-weight:800;font-size:15.5px;border:1px solid transparent;width:100%}
+  .btn + .btn{margin-top:9px}
+  .btn-green{background:linear-gradient(90deg,var(--fox),#d96a1e 55%,var(--gold));color:#1c1206;box-shadow:0 6px 18px rgba(240,118,42,.35)}
+  .btn-green:hover{filter:brightness(1.08)}
+  .btn-dark{background:rgba(10,14,26,.6);border-color:rgba(232,184,74,.45);color:#fff}
+  .btn-dark:hover{background:rgba(10,14,26,.85);border-color:var(--gold)}
+  .btn-copy{background:#fff;color:var(--fox-deep)}
+  .btn-copy:hover{background:#ffedd9}
+  .copy-note{font-size:13.5px;color:#ffd9a8;min-height:19px;margin:8px 0 0;text-align:center;font-weight:600}
+  .btn-hero{display:inline-flex;width:auto;background:linear-gradient(135deg,var(--fox),var(--fox-deep));color:#fff}
+  .btn-hero:hover{filter:brightness(1.08)}
+
+  footer{margin-top:56px;border-top:1px solid var(--line-soft);background:var(--bg2);padding:28px 0 38px}
+  .foot{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+  .foot .fbrand{display:flex;align-items:center;gap:10px}
+  .foot .fbrand img{width:36px;height:36px;border-radius:50%;border:2px solid var(--fox)}
+  .foot p{margin:10px 0 0;color:var(--ink-faint);font-size:13.5px;max-width:520px}
+  .foot .btn{width:auto}
+  .float-discord{
+    position:fixed;right:16px;bottom:16px;z-index:50;
+    display:inline-flex;align-items:center;gap:8px;background:#131c30;color:#fff;text-decoration:none;
+    border:2px solid var(--fox);
+    font-weight:700;padding:13px 18px;border-radius:999px;box-shadow:0 8px 24px rgba(240,118,42,.3);min-height:48px;
+  }
+  .float-discord svg{color:var(--gold)}
+  .float-discord:hover{border-color:var(--gold);background:#1a2742}
+  [hidden]{display:none !important}
+
+  @media (max-width:1180px){
+    .detail-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+    .order-panel{grid-column:1 / -1;position:static}
+  }
+  @media (max-width:1020px){
+    .searchbox{order:3;flex:1 1 100%;max-width:none}
+    .lang-switch{margin-left:auto}
+  }
+  @media (max-width:900px){
+    .trust-grid{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:repeat(2,1fr)}
+    .catalog-layout{grid-template-columns:1fr;gap:18px}
+    .sidebar{position:static}
+    .side-list{flex-direction:row;flex-wrap:wrap;gap:8px}
+    .side-list button{border:1px solid var(--line);border-radius:999px;padding:8px 14px;min-height:40px;font-size:14px}
+    .side-list button[aria-pressed="true"]{background:linear-gradient(135deg,var(--fox),var(--fox-deep));border-color:var(--fox)}
+    .side-list button .cnt{display:none}
+    .sidebar .side-label{display:none}
+  }
+  @media (max-width:700px){
+    .detail-grid{grid-template-columns:1fr}
+    .card-grid{grid-template-columns:1fr 1fr;gap:10px}
+    .p-card .art{height:118px}
+    .p-card .fox-badge{top:92px;width:28px;height:28px}
+    .p-card .cbody{padding:11px 12px 12px}
+    .p-card h3{font-size:15px}
+    .p-card ul li{font-size:12px}
+    .order-btn{padding:8px 13px;font-size:13px;min-height:38px}
+    .topbar{flex-wrap:wrap;padding:10px 14px;gap:10px}
+    .searchbox{order:3;flex:1 1 100%;max-width:none}
+    .band-inner{padding:38px 16px 30px}
+    .float-discord{display:none}
+    .wrap{padding:0 14px}
+    .d-banner img{height:230px}
+  }
+  @media (max-width:400px){
+    .trust-grid,.steps{grid-template-columns:1fr}
+    .two-col{grid-template-columns:1fr 1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .p-card,.switch::after{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#" id="brandHome">
+    <img src="assets/logo.png" alt="GegeTeam fox mascot logo" />
+    <span>
+      <span class="bname">GegeTeam — Nhà Cáo</span><br />
+      <span class="bsub">WoW Forever Boosting</span>
+    </span>
+  </a>
+  <div class="searchbox">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+    <input type="text" id="searchInput" data-i18n-ph="search_ph" placeholder="Search boosting services..." aria-label="Search services" />
+  </div>
+  <div class="lang-switch" role="group" aria-label="Language">
+    <button type="button" data-lang="en" aria-pressed="true">EN</button>
+    <button type="button" data-lang="vi" aria-pressed="false">VI</button>
+    <button type="button" data-lang="id" aria-pressed="false">ID</button>
+    <button type="button" data-lang="fil" aria-pressed="false">FIL</button>
+  </div>
+</header>
+
+<!-- ================= CATALOG VIEW ================= -->
+<div id="catalogView">
+  <div class="band">
+    <img class="band-bg" src="assets/hero-horde.jpg" alt="WoW Forever Horde key art — adventurers overlooking Azeroth" />
+    <div class="band-inner">
+      <p class="band-kicker">GegeTeam · Nhà Cáo</p>
+      <p class="band-slogan"><img src="assets/logo.png" alt="" /><span id="sloganText">Big enough passion. Real enough brothers.</span></p>
+      <h1 data-i18n="page_title">WoW Forever Boosting Services</h1>
+      <p class="lede" data-i18n="page_sub">Boosting services for fast leveling, gold, gearing, dungeons, PvP rank progression and professions — handled by a real team, paid by progress in USDT, with screenshot proof at every step.</p>
+      <div class="band-tags">
+        <span data-i18n-html="tag_pay"><b>USDT</b> · pay by progress</span>
+        <span data-i18n-html="tag_proof"><b>Screenshot proof</b> at every step</span>
+        <span data-i18n-html="tag_chat"><b>Discord first</b> — agree before you pay</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <div class="catalog-layout">
+      <aside class="sidebar">
+        <p class="side-label" data-i18n="side_label">WoW Forever</p>
+        <div class="side-list" id="sideList" role="group" aria-label="Categories"></div>
+      </aside>
+      <div id="catalogMain"></div>
+    </div>
+
+    <!-- TRUST -->
+    <section class="block" id="trust">
+      <div class="sec-head">
+        <h2 data-i18n-html="trust_title">Why players <span class="accent">trust GegeTeam</span></h2>
+        <p data-i18n="trust_sub">No big promises — just a clear, honest way of working that you can check at every step.</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="ticon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 6.5c-.8-1-2.6-1.5-5-1.5-3 0-5 1.3-5 3.2 0 4.4 10 2.4 10 6.6 0 1.9-2 3.2-5 3.2-2.4 0-4.2-.6-5-1.6"/></svg></div>
+          <h3 data-i18n="trust1_t">Pay by progress, in USDT</h3>
+          <p data-i18n="trust1_p">Payment is split into milestones — you only pay for each part after that progress is done. Prefer one payment? You can also pay in full on completion. All payments are in USDT, arranged directly with the team on Discord.</p>
+        </div>
+        <div class="trust-card">
+          <div class="ticon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 17 5-4 4 3 3-2 4 3"/></svg></div>
+          <h3 data-i18n="trust2_t">Screenshot proof</h3>
+          <p data-i18n="trust2_p">We send you screenshot updates as the work goes, so you can see exactly where your character is at any time.</p>
+        </div>
+        <div class="trust-card">
+          <div class="ticon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1.2 1.2L7 4.9M3.5 12l1.2 1.2L7 10.9M3.5 18l1.2 1.2L7 16.9"/></svg></div>
+          <h3 data-i18n="trust3_t">Tracked step by step</h3>
+          <p data-i18n="trust3_p">Every order is tracked with clear progress and handover notes, so nothing gets lost between boosters or shifts.</p>
+        </div>
+        <div class="trust-card">
+          <div class="ticon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.5 0-3-.4-4.2-1.1L3 20l1.1-5.3A8.5 8.5 0 1 1 21 11.5Z"/></svg></div>
+          <h3 data-i18n="trust4_t">Talk to us first</h3>
+          <p data-i18n="trust4_p">You chat directly with the team on Discord and agree on everything before any payment is made. No surprises.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="block" id="how">
+      <div class="sec-head">
+        <h2 data-i18n-html="how_title">How it <span class="accent">works</span></h2>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><h3 data-i18n="step1_t">Pick a service</h3><p data-i18n="step1_p">Choose a product and fill in your character details on its page.</p></div>
+        <div class="step"><div class="num">2</div><h3 data-i18n="step2_t">Send us the summary</h3><p data-i18n="step2_p">Copy your order summary and paste it into our Discord — or just message us there directly.</p></div>
+        <div class="step"><div class="num">3</div><h3 data-i18n="step3_t">Agree and pay by progress</h3><p data-i18n="step3_p">We confirm the final price together, then you pay in USDT milestone by milestone as work is completed.</p></div>
+        <div class="step"><div class="num">4</div><h3 data-i18n="step4_t">Follow the proof</h3><p data-i18n="step4_p">You receive screenshot updates along the way until the order is fully done.</p></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ================= DETAIL VIEW ================= -->
+<div id="detailView" hidden>
+  <main class="wrap">
+    <div class="crumbs">
+      <button type="button" class="back-btn" id="backBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg>
+        <span data-i18n="back_catalog">All services</span>
+      </button>
+      <span class="crumb-path">GegeTeam / WoW Forever / <b id="crumbCat"></b> / <b id="crumbName"></b></span>
+    </div>
+    <h1 class="detail-title" id="detailTitle"></h1>
+    <div class="detail-grid">
+      <div class="d-col" id="detailLeft"></div>
+      <div class="form-panel" id="formPanel"></div>
+      <aside class="order-panel" id="orderPanel" aria-live="polite"></aside>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="fbrand">
+        <img src="assets/logo.png" alt="" />
+        <strong>GegeTeam · Nhà Cáo</strong>
+      </div>
+      <p data-i18n="foot_text">WoW Forever boosting by GegeTeam. This is a fan-run service page and is not affiliated with Blizzard Entertainment.</p>
+    </div>
+    <a class="btn btn-hero" style="width:auto" href="https://discord.gg/t2fPyUPGY" target="_blank" rel="noopener"><span data-i18n="discord_cta">Contact Discord to place order</span></a>
+  </div>
+</footer>
+
+<a class="float-discord" href="https://discord.gg/t2fPyUPGY" target="_blank" rel="noopener" aria-label="Discord">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.32 4.37a19.8 19.8 0 0 0-4.93-1.51 13.78 13.78 0 0 0-.64 1.28 18.27 18.27 0 0 0-5.5 0 13.78 13.78 0 0 0-.64-1.28c-1.71.29-3.37.8-4.93 1.51A20.3 20.3 0 0 0 .1 18.06a19.9 19.9 0 0 0 6.07 3.03c.49-.66.93-1.37 1.3-2.1a12.9 12.9 0 0 1-2.05-.98c.17-.12.34-.25.5-.38a14.2 14.2 0 0 0 12.16 0c.16.13.33.26.5.38-.65.38-1.34.71-2.05.98.37.73.81 1.44 1.3 2.1a19.9 19.9 0 0 0 6.07-3.03 20.3 20.3 0 0 0-3.58-13.69ZM8.02 15.33c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.95-2.42 2.16-2.42 1.21 0 2.18 1.09 2.16 2.42 0 1.34-.95 2.42-2.16 2.42Zm7.96 0c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.95-2.42 2.16-2.42 1.21 0 2.18 1.09 2.16 2.42 0 1.34-.94 2.42-2.16 2.42Z"/></svg>
+  Discord
+</a>
+
+<script>
+(function(){
+"use strict";
+var DISCORD = "https://discord.gg/t2fPyUPGY";
+var CLASSES = ["Warrior","Paladin","Hunter","Rogue","Priest","Shaman","Mage","Warlock","Druid"];
+var FACTIONS = ["Alliance","Horde"];
+var RULESETS = [
+  {v:"Normal", k:"rs_normal"},
+  {v:"PvP", k:"rs_pvp"},
+  {v:"Roleplaying", k:"rs_rp"},
+  {v:"RP-PvP", k:"rs_rppvp"}
+];
+var PROFESSIONS_MAIN = ["Alchemy","Blacksmithing","Enchanting","Engineering","Herbalism","Leatherworking","Mining","Skinning","Tailoring"];
+var PROFESSIONS_ALL = PROFESSIONS_MAIN.concat(["Cooking","First Aid","Fishing"]);
+var SECONDARY = ["Cooking","First Aid","Fishing"];
+var EXTRAS = [
+  {v:"riding100", k:"ex_riding"},
+  {v:"flightpaths", k:"ex_flight"},
+  {v:"dualspec", k:"ex_dual"},
+  {v:"dungeonch", k:"ex_dungeon"},
+  {v:"attune", k:"ex_attune"}
+];
+var SLOGANS = {
+  en:"Big enough passion. Real enough brothers.",
+  vi:"Đam mê đủ lớn. Anh em đủ chất.",
+  id:"Passion yang cukup besar. Saudara yang cukup solid.",
+  fil:"Sapat ang passion. Sapat ang tunay na samahan."
+};
+var CATEGORIES = ["all","powerleveling","dungeons","professions","gearing","mounts","pvp","reputations","raids","custom"];
+
+var I18N = {
+en:{
+  search_ph:"Search boosting services...",
+  page_title:"WoW Forever Boosting Services",
+  page_sub:"Boosting services for fast leveling, gold, gearing, dungeons, PvP rank progression and professions — handled by a real team, paid by progress in USDT, with screenshot proof at every step.",
+  tag_pay:"<b>USDT</b> · pay by progress",
+  tag_proof:"<b>Screenshot proof</b> at every step",
+  tag_chat:"<b>Discord first</b> — agree before you pay",
+  side_label:"WoW Forever",
+  cat_all:"All", cat_powerleveling:"Powerleveling", cat_dungeons:"Dungeons", cat_professions:"Professions",
+  cat_gearing:"Gearing", cat_mounts:"Mounts", cat_pvp:"PvP", cat_reputations:"Reputations", cat_raids:"Raids", cat_custom:"Custom",
+  sec_top:"Top Offers", sec_results:"Search results", no_results:"No services match your search. Try another keyword or browse the categories.",
+  order_btn:"Order",
+  trust_title:'Why players <span class="accent">trust GegeTeam</span>',
+  trust_sub:"No big promises — just a clear, honest way of working that you can check at every step.",
+  trust1_t:"Pay by progress, in USDT",
+  trust1_p:"Payment is split into milestones — you only pay for each part after that progress is done. Prefer one payment? You can also pay in full on completion. All payments are in USDT, arranged directly with the team on Discord.",
+  trust2_t:"Screenshot proof",
+  trust2_p:"We send you screenshot updates as the work goes, so you can see exactly where your character is at any time.",
+  trust3_t:"Tracked step by step",
+  trust3_p:"Every order is tracked with clear progress and handover notes, so nothing gets lost between boosters or shifts.",
+  trust4_t:"Talk to us first",
+  trust4_p:"You chat directly with the team on Discord and agree on everything before any payment is made. No surprises.",
+  how_title:'How it <span class="accent">works</span>',
+  step1_t:"Pick a service", step1_p:"Choose a product and fill in your character details on its page.",
+  step2_t:"Send us the summary", step2_p:"Copy your order summary and paste it into our Discord — or just message us there directly.",
+  step3_t:"Agree and pay by progress", step3_p:"We confirm the final price together, then you pay in USDT milestone by milestone as work is completed.",
+  step4_t:"Follow the proof", step4_p:"You receive screenshot updates along the way until the order is fully done.",
+  foot_text:"WoW Forever boosting by GegeTeam. This is a fan-run service page and is not affiliated with Blizzard Entertainment.",
+  discord_cta:"Contact Discord to place order",
+  back_catalog:"All services",
+  desc_t:"Description", get_t:"What you'll get", addons_t:"Optional add-ons",
+  flex_t:"Flexible", flex_d:"Estimated completion time — confirmed with the team on Discord before your order starts.",
+  addon_speed:"Completion speed: choose Express or Super Express in the order panel as a preference — the team confirms timing on Discord.",
+  addon_share:"Share add-on (+$5): add account sharing to your order from the order panel.",
+  addon_extra:"Extra professions, riding unlocks and other requests: pick them in the options where available, or describe them in the notes field.",
+  addon_notes:"Anything else you need — play times, things to avoid, a special goal — goes in the notes and is confirmed before payment.",
+  f_ruleset:"Choose ruleset", rs_normal:"PvE (Normal)", rs_pvp:"PvP", rs_rp:"Roleplaying", rs_rppvp:"RP-PvP",
+  f_class:"Class", f_class_ph:"Choose your class",
+  f_faction:"Faction",
+  f_current:"Current level", f_target:"Target level",
+  err_level:"Target level must be higher than your current level (max 60).",
+  f_prof1:"First 300 profession", f_prof2:"Second 300 profession", prof_none:"Don't add profession",
+  f_secondary:"Secondary professions",
+  f_extras:"Choose Extras",
+  ex_riding:"100% Riding Skill + Mount", ex_flight:"All flight paths unlock", ex_dual:"Dual Spec unlock",
+  ex_dungeon:"Dungeon challenges", ex_attune:"Raid attunement (Onyxia's Lair)",
+  f_profession:"Choose profession", f_skill_cur:"Current skill", f_skill_target:"Target skill",
+  err_skill:"Current skill must be between 0 and 299.",
+  f_riding:"Select riding skill", ride60:"60% riding skill", ride100:"100% riding skill",
+  f_runs:"Number of runs",
+  f_hours:"Number of hours", f_activity:"What activity should the booster do?", f_activity_ph:"e.g. Leveling in Duskwood, herb farming, dungeon runs...",
+  f_goal:"Describe your goal", f_goal_ph:"Tell us where your character is now and exactly what you want to reach...",
+  f_gear:"Gearing options", gear_pre:"Pre-raid gear", gear_bis:"Pre-raid BiS gear",
+  share_t:"Share", share_d:"Account share add-on",
+  f_notes:"Notes (optional)", f_notes_ph:"Play times, things to avoid, anything we should know...",
+  op_chars:"Number of characters", op_speed:"Select completion speed",
+  speed_standard:"Standard", speed_express:"Express", speed_super:"Super Express",
+  sum_title:"Order summary",
+  total_label:"Total",
+  total_text:"Contact us on Discord to confirm your final price",
+  sum_payment:"Payment in USDT — by milestone as progress completes (or in full on completion). The team shares the USDT wallet details on Discord once your order is confirmed.",
+  copy_btn:"Copy order summary",
+  chat_before:"Chat before order",
+  copied:"Copied! Paste it into our Discord to place your order.",
+  copy_fail:"Copy failed — please select the summary text manually.",
+  copy_head:"GegeTeam — WoW Forever Boosting Order",
+  copy_total:"Total: Contact us on Discord to confirm your final price",
+  copy_payment:"Payment: USDT (milestones, arranged on Discord)",
+  s_service:"Service", s_class:"Class", s_faction:"Faction", s_ruleset:"Ruleset",
+  s_current:"Current level", s_target:"Target level", s_runs:"Runs", s_hours:"Hours", s_request:"Request",
+  s_profession:"Profession", s_skill:"Skill", s_riding:"Riding skill", s_gear:"Gearing",
+  s_prof1:"First profession", s_prof2:"Second profession", s_secondary:"Secondary", s_extras:"Extras",
+  s_chars:"Characters", s_speed:"Speed", s_share:"Share", s_notes:"Notes",
+  s_empty:"Your chosen options will appear here."
+},
+vi:{
+  search_ph:"Tìm dịch vụ boosting...",
+  page_title:"Dịch Vụ Boosting WoW Forever",
+  page_sub:"Các dịch vụ boosting cày cấp nhanh, gold, lên đồ, dungeon, leo hạng PvP và cày nghề — thực hiện bởi một team thật, thanh toán theo tiến độ bằng USDT, có ảnh chụp chứng minh ở từng bước.",
+  tag_pay:"<b>USDT</b> · trả theo tiến độ",
+  tag_proof:"<b>Ảnh chụp chứng minh</b> ở từng bước",
+  tag_chat:"<b>Discord trước</b> — thống nhất rồi mới trả tiền",
+  side_label:"WoW Forever",
+  cat_all:"Tất cả", cat_powerleveling:"Cày cấp", cat_dungeons:"Dungeon", cat_professions:"Nghề nghiệp",
+  cat_gearing:"Lên đồ", cat_mounts:"Thú cưỡi", cat_pvp:"PvP", cat_reputations:"Danh vọng", cat_raids:"Raid", cat_custom:"Theo yêu cầu",
+  sec_top:"Ưu đãi nổi bật", sec_results:"Kết quả tìm kiếm", no_results:"Không có dịch vụ nào khớp với tìm kiếm. Thử từ khóa khác hoặc duyệt theo danh mục.",
+  order_btn:"Đặt đơn",
+  trust_title:'Vì sao người chơi <span class="accent">tin GegeTeam</span>',
+  trust_sub:"Không hứa hẹn lớn lao — chỉ là cách làm việc rõ ràng, trung thực mà bạn có thể kiểm chứng ở từng bước.",
+  trust1_t:"Thanh toán theo tiến độ, bằng USDT",
+  trust1_p:"Thanh toán được chia thành các mốc — bạn chỉ trả cho phần nào sau khi phần đó đã hoàn thành. Muốn trả một lần? Bạn cũng có thể trả đủ khi hoàn thành. Mọi thanh toán đều bằng USDT, thỏa thuận trực tiếp với team trên Discord.",
+  trust2_t:"Chứng minh bằng ảnh chụp",
+  trust2_p:"Chúng tôi gửi ảnh chụp cập nhật trong quá trình làm, để bạn thấy chính xác nhân vật của mình đang ở đâu vào bất cứ lúc nào.",
+  trust3_t:"Theo dõi từng bước",
+  trust3_p:"Mỗi đơn đều được theo dõi với tiến độ rõ ràng và ghi chú bàn giao, nên không có gì bị thất lạc giữa các booster hay các ca làm.",
+  trust4_t:"Trao đổi với chúng tôi trước",
+  trust4_p:"Bạn chat trực tiếp với team trên Discord và thống nhất mọi thứ trước khi thanh toán bất kỳ khoản nào. Không có bất ngờ.",
+  how_title:'Cách <span class="accent">đặt đơn</span>',
+  step1_t:"Chọn dịch vụ", step1_p:"Chọn một sản phẩm và điền thông tin nhân vật trên trang của nó.",
+  step2_t:"Gửi bản tóm tắt cho chúng tôi", step2_p:"Sao chép bản tóm tắt đơn và dán vào Discord của team — hoặc nhắn trực tiếp cho chúng tôi ở đó.",
+  step3_t:"Thống nhất & trả theo tiến độ", step3_p:"Chúng ta xác nhận giá cuối cùng cùng nhau, sau đó bạn trả USDT theo từng mốc khi công việc hoàn thành.",
+  step4_t:"Theo dõi bằng chứng", step4_p:"Bạn nhận ảnh chụp cập nhật trong suốt quá trình cho đến khi đơn hoàn thành toàn bộ.",
+  foot_text:"Dịch vụ boosting WoW Forever bởi GegeTeam. Đây là trang dịch vụ do người hâm mộ vận hành, không liên kết với Blizzard Entertainment.",
+  discord_cta:"Liên hệ Discord để đặt đơn",
+  back_catalog:"Tất cả dịch vụ",
+  desc_t:"Mô tả", get_t:"Bạn sẽ nhận được", addons_t:"Tùy chọn thêm",
+  flex_t:"Linh hoạt", flex_d:"Thời gian hoàn thành dự kiến — xác nhận với team trên Discord trước khi đơn bắt đầu.",
+  addon_speed:"Tốc độ hoàn thành: chọn Express hoặc Super Express trong panel đặt đơn như một ưu tiên — team sẽ xác nhận thời gian trên Discord.",
+  addon_share:"Phụ phí Share (+$5): thêm share tài khoản vào đơn của bạn từ panel đặt đơn.",
+  addon_extra:"Thêm nghề, mở kỹ năng cưỡi và các yêu cầu khác: chọn trong phần tùy chọn nếu có, hoặc mô tả trong ô ghi chú.",
+  addon_notes:"Mọi nhu cầu khác — giờ chơi, điều cần tránh, mục tiêu đặc biệt — hãy ghi vào ghi chú và sẽ được xác nhận trước khi thanh toán.",
+  f_ruleset:"Chọn ruleset", rs_normal:"PvE (Normal)", rs_pvp:"PvP", rs_rp:"Roleplaying", rs_rppvp:"RP-PvP",
+  f_class:"Class", f_class_ph:"Chọn class của bạn",
+  f_faction:"Phe phái",
+  f_current:"Cấp hiện tại", f_target:"Cấp mục tiêu",
+  err_level:"Cấp mục tiêu phải cao hơn cấp hiện tại (tối đa 60).",
+  f_prof1:"Nghề 300 thứ nhất", f_prof2:"Nghề 300 thứ hai", prof_none:"Không thêm nghề",
+  f_secondary:"Nghề phụ",
+  f_extras:"Chọn thêm (Extras)",
+  ex_riding:"Kỹ năng cưỡi 100% + Thú cưỡi", ex_flight:"Mở tất cả đường bay", ex_dual:"Mở Dual Spec",
+  ex_dungeon:"Thử thách dungeon", ex_attune:"Mở quyền vào raid (Onyxia's Lair)",
+  f_profession:"Chọn nghề", f_skill_cur:"Kỹ năng hiện tại", f_skill_target:"Kỹ năng mục tiêu",
+  err_skill:"Kỹ năng hiện tại phải từ 0 đến 299.",
+  f_riding:"Chọn kỹ năng cưỡi", ride60:"Kỹ năng cưỡi 60%", ride100:"Kỹ năng cưỡi 100%",
+  f_runs:"Số lượt chạy",
+  f_hours:"Số giờ", f_activity:"Booster nên làm hoạt động gì?", f_activity_ph:"VD: Cày cấp ở Duskwood, farm thảo dược, chạy dungeon...",
+  f_goal:"Mô tả mục tiêu của bạn", f_goal_ph:"Cho chúng tôi biết nhân vật của bạn đang ở đâu và bạn muốn đạt điều gì...",
+  f_gear:"Tùy chọn lên đồ", gear_pre:"Đồ pre-raid", gear_bis:"Đồ pre-raid BiS",
+  share_t:"Share", share_d:"Phụ phí share tài khoản",
+  f_notes:"Ghi chú (không bắt buộc)", f_notes_ph:"Giờ chơi, điều cần tránh, bất cứ điều gì chúng tôi nên biết...",
+  op_chars:"Số nhân vật", op_speed:"Chọn tốc độ hoàn thành",
+  speed_standard:"Tiêu chuẩn", speed_express:"Express", speed_super:"Super Express",
+  sum_title:"Tóm tắt đơn hàng",
+  total_label:"Tổng cộng",
+  total_text:"Liên hệ chúng tôi trên Discord để xác nhận giá cuối cùng",
+  sum_payment:"Thanh toán bằng USDT — theo từng mốc khi tiến độ hoàn thành (hoặc trả đủ khi hoàn thành). Team sẽ gửi thông tin ví USDT trên Discord khi đơn của bạn được xác nhận.",
+  copy_btn:"Sao chép tóm tắt đơn",
+  chat_before:"Chat trước khi đặt đơn",
+  copied:"Đã sao chép! Dán vào Discord của team để đặt đơn.",
+  copy_fail:"Sao chép thất bại — vui lòng chọn văn bản tóm tắt thủ công.",
+  copy_head:"GegeTeam — Đơn Boosting WoW Forever",
+  copy_total:"Tổng cộng: Liên hệ chúng tôi trên Discord để xác nhận giá cuối cùng",
+  copy_payment:"Thanh toán: USDT (theo mốc, thỏa thuận trên Discord)",
+  s_service:"Dịch vụ", s_class:"Class", s_faction:"Phe phái", s_ruleset:"Ruleset",
+  s_current:"Cấp hiện tại", s_target:"Cấp mục tiêu", s_runs:"Số lượt", s_hours:"Số giờ", s_request:"Yêu cầu",
+  s_profession:"Nghề", s_skill:"Kỹ năng", s_riding:"Kỹ năng cưỡi", s_gear:"Lên đồ",
+  s_prof1:"Nghề thứ nhất", s_prof2:"Nghề thứ hai", s_secondary:"Nghề phụ", s_extras:"Thêm",
+  s_chars:"Số nhân vật", s_speed:"Tốc độ", s_share:"Share", s_notes:"Ghi chú",
+  s_empty:"Các lựa chọn của bạn sẽ hiện tại đây."
+},
+id:{
+  search_ph:"Cari layanan boosting...",
+  page_title:"Layanan Boosting WoW Forever",
+  page_sub:"Layanan boosting untuk leveling cepat, gold, gearing, dungeon, progres rank PvP, dan profesi — dikerjakan tim sungguhan, dibayar per progres dalam USDT, dengan bukti screenshot di setiap langkah.",
+  tag_pay:"<b>USDT</b> · bayar per progres",
+  tag_proof:"<b>Bukti screenshot</b> di setiap langkah",
+  tag_chat:"<b>Discord dulu</b> — sepakati sebelum membayar",
+  side_label:"WoW Forever",
+  cat_all:"Semua", cat_powerleveling:"Powerleveling", cat_dungeons:"Dungeon", cat_professions:"Profesi",
+  cat_gearing:"Gearing", cat_mounts:"Mount", cat_pvp:"PvP", cat_reputations:"Reputasi", cat_raids:"Raid", cat_custom:"Khusus",
+  sec_top:"Penawaran Teratas", sec_results:"Hasil pencarian", no_results:"Tidak ada layanan yang cocok dengan pencarianmu. Coba kata kunci lain atau jelajahi kategori.",
+  order_btn:"Pesan",
+  trust_title:'Kenapa pemain <span class="accent">percaya GegeTeam</span>',
+  trust_sub:"Tanpa janji muluk — hanya cara kerja yang jelas dan jujur yang bisa kamu periksa di setiap langkah.",
+  trust1_t:"Bayar per progres, dalam USDT",
+  trust1_p:"Pembayaran dibagi menjadi beberapa milestone — kamu hanya membayar setiap bagian setelah progres itu selesai. Mau bayar sekali? Kamu juga bisa membayar lunas saat selesai. Semua pembayaran dalam USDT, diatur langsung dengan tim di Discord.",
+  trust2_t:"Bukti screenshot",
+  trust2_p:"Kami mengirimkan update screenshot selama pengerjaan, jadi kamu bisa melihat persis posisi karaktermu kapan saja.",
+  trust3_t:"Terpantau langkah demi langkah",
+  trust3_p:"Setiap pesanan terpantau dengan progres dan catatan serah terima yang jelas, jadi tidak ada yang hilang di antara booster atau shift.",
+  trust4_t:"Ngobrol dengan kami dulu",
+  trust4_p:"Kamu chat langsung dengan tim di Discord dan menyepakati semuanya sebelum pembayaran apa pun dilakukan. Tanpa kejutan.",
+  how_title:'Cara <span class="accent">kerjanya</span>',
+  step1_t:"Pilih layanan", step1_p:"Pilih produk dan isi detail karaktermu di halamannya.",
+  step2_t:"Kirim ringkasannya ke kami", step2_p:"Salin ringkasan pesananmu dan tempelkan ke Discord kami — atau langsung kirim pesan ke kami di sana.",
+  step3_t:"Sepakati & bayar per progres", step3_p:"Kami mengonfirmasi harga final bersama, lalu kamu membayar USDT per milestone seiring pekerjaan selesai.",
+  step4_t:"Ikuti buktinya", step4_p:"Kamu menerima update screenshot sepanjang proses sampai pesanan selesai sepenuhnya.",
+  foot_text:"Boosting WoW Forever oleh GegeTeam. Ini adalah halaman layanan yang dijalankan penggemar dan tidak berafiliasi dengan Blizzard Entertainment.",
+  discord_cta:"Hubungi Discord untuk memesan",
+  back_catalog:"Semua layanan",
+  desc_t:"Deskripsi", get_t:"Yang akan kamu dapatkan", addons_t:"Add-on opsional",
+  flex_t:"Fleksibel", flex_d:"Perkiraan waktu penyelesaian — dikonfirmasi dengan tim di Discord sebelum pesananmu dimulai.",
+  addon_speed:"Kecepatan penyelesaian: pilih Express atau Super Express di panel pesanan sebagai preferensi — tim mengonfirmasi waktunya di Discord.",
+  addon_share:"Add-on Share (+$5): tambahkan share akun ke pesananmu dari panel pesanan.",
+  addon_extra:"Profesi tambahan, unlock riding, dan permintaan lain: pilih di opsi jika tersedia, atau jelaskan di kolom catatan.",
+  addon_notes:"Kebutuhan lain apa pun — jam bermain, hal yang harus dihindari, target khusus — tulis di catatan dan akan dikonfirmasi sebelum pembayaran.",
+  f_ruleset:"Pilih ruleset", rs_normal:"PvE (Normal)", rs_pvp:"PvP", rs_rp:"Roleplaying", rs_rppvp:"RP-PvP",
+  f_class:"Class", f_class_ph:"Pilih class-mu",
+  f_faction:"Faksi",
+  f_current:"Level saat ini", f_target:"Level target",
+  err_level:"Level target harus lebih tinggi dari level saat ini (maks 60).",
+  f_prof1:"Profesi 300 pertama", f_prof2:"Profesi 300 kedua", prof_none:"Jangan tambahkan profesi",
+  f_secondary:"Profesi sekunder",
+  f_extras:"Pilih Ekstra",
+  ex_riding:"Skill Riding 100% + Mount", ex_flight:"Buka semua flight path", ex_dual:"Buka Dual Spec",
+  ex_dungeon:"Tantangan dungeon", ex_attune:"Attunement raid (Onyxia's Lair)",
+  f_profession:"Pilih profesi", f_skill_cur:"Skill saat ini", f_skill_target:"Skill target",
+  err_skill:"Skill saat ini harus antara 0 dan 299.",
+  f_riding:"Pilih skill riding", ride60:"Skill riding 60%", ride100:"Skill riding 100%",
+  f_runs:"Jumlah run",
+  f_hours:"Jumlah jam", f_activity:"Aktivitas apa yang harus dilakukan booster?", f_activity_ph:"cth. Leveling di Duskwood, farming herb, run dungeon...",
+  f_goal:"Jelaskan targetmu", f_goal_ph:"Beri tahu kami posisi karaktermu sekarang dan apa tepatnya yang ingin kamu capai...",
+  f_gear:"Opsi gearing", gear_pre:"Gear pre-raid", gear_bis:"Gear pre-raid BiS",
+  share_t:"Share", share_d:"Add-on share akun",
+  f_notes:"Catatan (opsional)", f_notes_ph:"Jam bermain, hal yang harus dihindari, apa pun yang perlu kami tahu...",
+  op_chars:"Jumlah karakter", op_speed:"Pilih kecepatan penyelesaian",
+  speed_standard:"Standar", speed_express:"Express", speed_super:"Super Express",
+  sum_title:"Ringkasan pesanan",
+  total_label:"Total",
+  total_text:"Hubungi kami di Discord untuk mengonfirmasi harga finalmu",
+  sum_payment:"Pembayaran dalam USDT — per milestone seiring progres selesai (atau lunas saat selesai). Tim akan membagikan detail wallet USDT di Discord setelah pesananmu dikonfirmasi.",
+  copy_btn:"Salin ringkasan pesanan",
+  chat_before:"Chat sebelum memesan",
+  copied:"Tersalin! Tempelkan ke Discord kami untuk memesan.",
+  copy_fail:"Gagal menyalin — silakan pilih teks ringkasan secara manual.",
+  copy_head:"GegeTeam — Pesanan Boosting WoW Forever",
+  copy_total:"Total: Hubungi kami di Discord untuk mengonfirmasi harga finalmu",
+  copy_payment:"Pembayaran: USDT (per milestone, diatur di Discord)",
+  s_service:"Layanan", s_class:"Class", s_faction:"Faksi", s_ruleset:"Ruleset",
+  s_current:"Level saat ini", s_target:"Level target", s_runs:"Jumlah run", s_hours:"Jam", s_request:"Permintaan",
+  s_profession:"Profesi", s_skill:"Skill", s_riding:"Skill riding", s_gear:"Gearing",
+  s_prof1:"Profesi pertama", s_prof2:"Profesi kedua", s_secondary:"Sekunder", s_extras:"Ekstra",
+  s_chars:"Karakter", s_speed:"Kecepatan", s_share:"Share", s_notes:"Catatan",
+  s_empty:"Opsi yang kamu pilih akan muncul di sini."
+},
+fil:{
+  search_ph:"Maghanap ng boosting services...",
+  page_title:"WoW Forever Boosting Services",
+  page_sub:"Boosting services para sa mabilis na leveling, gold, gearing, dungeons, PvP rank progression at professions — ginagawa ng totoong team, bayad kada progress sa USDT, may screenshot proof sa bawat hakbang.",
+  tag_pay:"<b>USDT</b> · bayad kada progress",
+  tag_proof:"<b>Screenshot proof</b> sa bawat hakbang",
+  tag_chat:"<b>Discord muna</b> — magkasundo bago magbayad",
+  side_label:"WoW Forever",
+  cat_all:"Lahat", cat_powerleveling:"Powerleveling", cat_dungeons:"Dungeons", cat_professions:"Professions",
+  cat_gearing:"Gearing", cat_mounts:"Mounts", cat_pvp:"PvP", cat_reputations:"Reputations", cat_raids:"Raids", cat_custom:"Custom",
+  sec_top:"Top Offers", sec_results:"Mga resulta ng paghahanap", no_results:"Walang serbisyong tumugma sa hinanap mo. Sumubok ng ibang keyword o i-browse ang mga kategorya.",
+  order_btn:"Umorder",
+  trust_title:'Bakit <span class="accent">nagtiwala</span> ang mga player sa GegeTeam',
+  trust_sub:"Walang malalaking pangako — malinaw at tapat na paraan lang ng pagtatrabaho na pwede mong i-check sa bawat hakbang.",
+  trust1_t:"Bayad kada progress, sa USDT",
+  trust1_p:"Hinahati ang bayad sa mga milestone — magbabayad ka lang para sa bawat bahagi pagkatapos matapos ang progress na iyon. Gusto ng isang bayaran? Pwede ring bayaran nang buo pag natapos. Lahat ng bayad ay sa USDT, inaayos nang direkta kasama ang team sa Discord.",
+  trust2_t:"Screenshot proof",
+  trust2_p:"Nagpapadala kami ng screenshot updates habang ginagawa ang trabaho, para makita mo nang eksakto kung nasaan ang character mo anumang oras.",
+  trust3_t:"Naka-track bawat hakbang",
+  trust3_p:"Bawat order ay naka-track na may malinaw na progress at handover notes, kaya walang mawawala sa pagitan ng mga booster o shift.",
+  trust4_t:"Kausapin muna kami",
+  trust4_p:"Direkta kang makikipag-chat sa team sa Discord at magkakasundo kayo sa lahat bago ang anumang bayad. Walang sorpresa.",
+  how_title:'Paano ito <span class="accent">gumagana</span>',
+  step1_t:"Pumili ng service", step1_p:"Pumili ng produkto at punan ang detalye ng character mo sa page nito.",
+  step2_t:"Ipadala sa amin ang summary", step2_p:"Kopyahin ang order summary mo at i-paste sa Discord namin — o mag-message ka na lang doon nang direkta.",
+  step3_t:"Magkasundo & magbayad kada progress", step3_p:"Sama-sama nating iko-confirm ang final price, tapos magbabayad ka ng USDT kada milestone habang natatapos ang trabaho.",
+  step4_t:"Sundan ang proof", step4_p:"Makakatanggap ka ng screenshot updates hanggang sa tuluyang matapos ang order.",
+  foot_text:"WoW Forever boosting ng GegeTeam. Fan-run service page ito at hindi ito affiliated sa Blizzard Entertainment.",
+  discord_cta:"Makipag-ugnayan sa Discord para umorder",
+  back_catalog:"Lahat ng serbisyo",
+  desc_t:"Paglalarawan", get_t:"Ang makukuha mo", addons_t:"Mga optional na add-on",
+  flex_t:"Flexible", flex_d:"Tinatayang oras ng pagkumpleto — iko-confirm kasama ang team sa Discord bago magsimula ang order mo.",
+  addon_speed:"Bilis ng pagkumpleto: piliin ang Express o Super Express sa order panel bilang preference — iko-confirm ng team ang timing sa Discord.",
+  addon_share:"Share add-on (+$5): idagdag ang account sharing sa order mo mula sa order panel.",
+  addon_extra:"Dagdag na professions, riding unlocks at iba pang request: piliin sa mga option kung available, o ilarawan sa notes field.",
+  addon_notes:"Anumang iba pang kailangan mo — oras ng paglalaro, mga dapat iwasan, espesyal na goal — ilagay sa notes at iko-confirm bago ang bayad.",
+  f_ruleset:"Pumili ng ruleset", rs_normal:"PvE (Normal)", rs_pvp:"PvP", rs_rp:"Roleplaying", rs_rppvp:"RP-PvP",
+  f_class:"Class", f_class_ph:"Piliin ang class mo",
+  f_faction:"Faction",
+  f_current:"Kasalukuyang level", f_target:"Target na level",
+  err_level:"Dapat mas mataas ang target level kaysa sa current level mo (max 60).",
+  f_prof1:"Unang 300 profession", f_prof2:"Pangalawang 300 profession", prof_none:"Huwag magdagdag ng profession",
+  f_secondary:"Secondary professions",
+  f_extras:"Pumili ng Extras",
+  ex_riding:"100% Riding Skill + Mount", ex_flight:"I-unlock lahat ng flight paths", ex_dual:"Dual Spec unlock",
+  ex_dungeon:"Dungeon challenges", ex_attune:"Raid attunement (Onyxia's Lair)",
+  f_profession:"Pumili ng profession", f_skill_cur:"Kasalukuyang skill", f_skill_target:"Target na skill",
+  err_skill:"Ang kasalukuyang skill ay dapat nasa pagitan ng 0 at 299.",
+  f_riding:"Pumili ng riding skill", ride60:"60% riding skill", ride100:"100% riding skill",
+  f_runs:"Bilang ng runs",
+  f_hours:"Bilang ng oras", f_activity:"Anong activity ang dapat gawin ng booster?", f_activity_ph:"hal. Leveling sa Duskwood, herb farming, dungeon runs...",
+  f_goal:"Ilarawan ang goal mo", f_goal_ph:"Sabihin mo sa amin kung nasaan ang character mo ngayon at kung ano eksakto ang gusto mong maabot...",
+  f_gear:"Mga option sa gearing", gear_pre:"Pre-raid gear", gear_bis:"Pre-raid BiS gear",
+  share_t:"Share", share_d:"Add-on para sa account share",
+  f_notes:"Mga note (opsyonal)", f_notes_ph:"Oras ng paglalaro, mga dapat iwasan, anumang dapat naming malaman...",
+  op_chars:"Bilang ng characters", op_speed:"Pumili ng bilis ng pagkumpleto",
+  speed_standard:"Standard", speed_express:"Express", speed_super:"Super Express",
+  sum_title:"Buod ng order",
+  total_label:"Total",
+  total_text:"Makipag-ugnayan sa amin sa Discord para kumpirmahin ang final price mo",
+  sum_payment:"Bayad sa USDT — kada milestone habang natatapos ang progress (o buo pag natapos). Ibabahagi ng team ang detalye ng USDT wallet sa Discord kapag nakumpirma ang order mo.",
+  copy_btn:"Kopyahin ang buod ng order",
+  chat_before:"Mag-chat bago umorder",
+  copied:"Nakopya na! I-paste ito sa Discord namin para umorder.",
+  copy_fail:"Hindi nakopya — paki-select na lang ang summary text nang mano-mano.",
+  copy_head:"GegeTeam — WoW Forever Boosting Order",
+  copy_total:"Total: Makipag-ugnayan sa amin sa Discord para kumpirmahin ang final price mo",
+  copy_payment:"Bayad: USDT (kada milestone, inaayos sa Discord)",
+  s_service:"Service", s_class:"Class", s_faction:"Faction", s_ruleset:"Ruleset",
+  s_current:"Kasalukuyang level", s_target:"Target na level", s_runs:"Runs", s_hours:"Oras", s_request:"Request",
+  s_profession:"Profession", s_skill:"Skill", s_riding:"Riding skill", s_gear:"Gearing",
+  s_prof1:"Unang profession", s_prof2:"Pangalawang profession", s_secondary:"Secondary", s_extras:"Extras",
+  s_chars:"Characters", s_speed:"Bilis", s_share:"Share", s_notes:"Mga note",
+  s_empty:"Lalabas dito ang mga pinili mong option."
+}
+};
+
+var PRODUCTS = [
+{id:"powerleveling",img:"assets/adventurers.webp",alt:"WoW Forever adventurers overlooking Azeroth",cat:"powerleveling",cats:["powerleveling"],type:"leveling",featured:true,i18n:{
+ en:{name:"Powerleveling",bullets:["Any range, up to level 60","Screenshot proof updates","Pay by progress in USDT"],desc:"We level your character from its current level to the target you choose — any range, up to the level 60 cap.",gets:["Leveling from your current level to your target level","Progress updates with screenshots along the way","Milestone-based payment in USDT"]},
+ vi:{name:"Cày cấp",bullets:["Mọi khoảng cấp, tối đa cấp 60","Cập nhật bằng ảnh chụp","Trả theo tiến độ bằng USDT"],desc:"Chúng tôi cày nhân vật của bạn từ cấp hiện tại lên cấp mục tiêu bạn chọn — mọi khoảng cấp, tối đa cấp 60.",gets:["Cày từ cấp hiện tại lên cấp mục tiêu của bạn","Cập nhật tiến độ kèm ảnh chụp trong quá trình","Thanh toán theo mốc bằng USDT"]},
+ id:{name:"Powerleveling",bullets:["Rentang apa pun, hingga level 60","Update bukti screenshot","Bayar per progres dalam USDT"],desc:"Kami menaikkan level karaktermu dari level saat ini ke target yang kamu pilih — rentang apa pun, hingga batas level 60.",gets:["Leveling dari level saat ini ke level targetmu","Update progres dengan screenshot di sepanjang jalan","Pembayaran berbasis milestone dalam USDT"]},
+ fil:{name:"Powerleveling",bullets:["Anumang range, hanggang level 60","Screenshot proof updates","Bayad kada progress sa USDT"],desc:"I-level up namin ang character mo mula sa current level hanggang sa target na pipiliin mo — anumang range, hanggang sa level 60 cap.",gets:["Leveling mula sa current level hanggang sa target level mo","Progress updates na may screenshot sa daan","Milestone-based na bayad sa USDT"]}}},
+{id:"bundle160",img:"assets/flying-mounts.webp",alt:"Flying mounts in World of Warcraft",cat:"powerleveling",cats:["powerleveling","mounts"],type:"leveling",featured:true,i18n:{
+ en:{name:"1–60 + Mount Bundle",bullets:["Full 1 to 60 leveling","Riding arranged with the team","Screenshot proof updates"],desc:"The full run from level 1 to 60, with riding skill and a mount arranged as part of the same order.",gets:["Character leveling from level 1 to 60","Riding skill and mount included in the plan","One order, tracked step by step"]},
+ vi:{name:"Gói 1–60 + Thú cưỡi",bullets:["Cày trọn từ cấp 1 đến 60","Kỹ năng cưỡi sắp xếp cùng team","Cập nhật bằng ảnh chụp"],desc:"Cày trọn hành trình từ cấp 1 đến 60, kèm kỹ năng cưỡi và thú cưỡi được sắp xếp trong cùng một đơn.",gets:["Cày nhân vật từ cấp 1 đến 60","Kỹ năng cưỡi và thú cưỡi nằm trong kế hoạch","Một đơn duy nhất, theo dõi từng bước"]},
+ id:{name:"Paket 1–60 + Mount",bullets:["Leveling penuh 1 sampai 60","Riding diatur bersama tim","Update bukti screenshot"],desc:"Perjalanan penuh dari level 1 ke 60, dengan skill riding dan mount yang diatur sebagai bagian dari pesanan yang sama.",gets:["Leveling karakter dari level 1 ke 60","Skill riding dan mount termasuk dalam rencana","Satu pesanan, terpantau langkah demi langkah"]},
+ fil:{name:"1–60 + Mount Bundle",bullets:["Buong leveling mula 1 hanggang 60","Riding na inaayos kasama ang team","Screenshot proof updates"],desc:"Ang buong takbo mula level 1 hanggang 60, kasama ang riding skill at mount na inaayos bilang bahagi ng iisang order.",gets:["Character leveling mula level 1 hanggang 60","Kasama sa plano ang riding skill at mount","Isang order, naka-track bawat hakbang"]}}},
+{id:"dungeon-bundle",img:"assets/darkportal.webp",alt:"The Dark Portal key art",cat:"dungeons",cats:["dungeons"],type:"dungeons",featured:true,i18n:{
+ en:{name:"Dungeon Bundle",bullets:["Classic dungeon runs","You choose the number of runs","Experienced booster"],desc:"Dungeon runs with an experienced booster. Tell us how many runs you want and what you are aiming for.",gets:["The number of dungeon runs you select","Runs done by an experienced booster","Screenshot proof after the runs"]},
+ vi:{name:"Gói Dungeon",bullets:["Chạy dungeon classic","Bạn chọn số lượt chạy","Booster giàu kinh nghiệm"],desc:"Chạy dungeon cùng booster giàu kinh nghiệm. Cho chúng tôi biết bạn muốn bao nhiêu lượt và mục tiêu của bạn.",gets:["Số lượt chạy dungeon bạn chọn","Các lượt chạy do booster kinh nghiệm thực hiện","Ảnh chụp chứng minh sau các lượt chạy"]},
+ id:{name:"Paket Dungeon",bullets:["Run dungeon klasik","Kamu yang memilih jumlah run","Booster berpengalaman"],desc:"Run dungeon dengan booster berpengalaman. Beri tahu kami berapa run yang kamu mau dan apa targetmu.",gets:["Jumlah run dungeon yang kamu pilih","Run dikerjakan booster berpengalaman","Bukti screenshot setelah run selesai"]},
+ fil:{name:"Dungeon Bundle",bullets:["Classic dungeon runs","Ikaw ang pipili ng bilang ng runs","Experienced na booster"],desc:"Dungeon runs kasama ang experienced na booster. Sabihin mo sa amin kung ilang runs ang gusto mo at ano ang target mo.",gets:["Ang bilang ng dungeon runs na pipiliin mo","Runs na gagawin ng experienced na booster","Screenshot proof pagkatapos ng runs"]}}},
+{id:"hero-bundle",img:"assets/alliance-keyart.jpg",alt:"WoW Forever Alliance key art",cat:"powerleveling",cats:["powerleveling","gearing"],type:"leveling",featured:true,i18n:{
+ en:{name:"Hero Bundle",bullets:["1–60 leveling included","Riding, professions and gearing","Everything in one order"],desc:"A complete package: leveling to 60 combined with riding, profession work and gearing, arranged in a single order.",gets:["Leveling from 1 to 60","Riding and profession progress","Gearing steps agreed with the team"]},
+ vi:{name:"Gói Hero",bullets:["Đã gồm cày cấp 1–60","Cưỡi thú, nghề và lên đồ","Tất cả trong một đơn"],desc:"Một gói trọn vẹn: cày cấp lên 60 kết hợp kỹ năng cưỡi, cày nghề và lên đồ, sắp xếp trong một đơn duy nhất.",gets:["Cày cấp từ 1 đến 60","Tiến độ kỹ năng cưỡi và nghề","Các bước lên đồ thống nhất với team"]},
+ id:{name:"Paket Hero",bullets:["Termasuk leveling 1–60","Riding, profesi, dan gearing","Semuanya dalam satu pesanan"],desc:"Paket lengkap: leveling ke 60 digabung dengan riding, pengerjaan profesi, dan gearing, diatur dalam satu pesanan.",gets:["Leveling dari 1 ke 60","Progres riding dan profesi","Langkah gearing disepakati dengan tim"]},
+ fil:{name:"Hero Bundle",bullets:["Kasama ang 1–60 leveling","Riding, professions at gearing","Lahat sa isang order"],desc:"Isang kumpletong package: leveling hanggang 60 na may riding, profession work at gearing, inaayos sa iisang order.",gets:["Leveling mula 1 hanggang 60","Riding at profession progress","Mga hakbang sa gearing na napagkasunduan kasama ang team"]}}},
+{id:"hourly",img:"assets/adventurers.webp",alt:"WoW Forever adventurers overlooking Azeroth",cat:"powerleveling",cats:["powerleveling","custom"],type:"hourly",i18n:{
+ en:{name:"Hourly Driving",bullets:["Boosting by the hour","Any activity you choose","No need to grind yourself"],desc:"A booster plays for you by the hour, on the activity you pick — leveling, farming, dungeons or something else.",gets:["Booster time for the hours you select","The activity of your choice","A progress report when the session ends"]},
+ vi:{name:"Cày thuê theo giờ",bullets:["Boost theo giờ","Mọi hoạt động bạn chọn","Không cần tự cày"],desc:"Booster chơi thay bạn theo giờ, với hoạt động bạn chọn — cày cấp, farming, dungeon hoặc việc khác.",gets:["Thời gian booster theo số giờ bạn chọn","Hoạt động do bạn lựa chọn","Báo cáo tiến độ khi buổi chơi kết thúc"]},
+ id:{name:"Boost per Jam",bullets:["Boosting per jam","Aktivitas apa pun pilihanmu","Tidak perlu grinding sendiri"],desc:"Booster bermain untukmu per jam, pada aktivitas yang kamu pilih — leveling, farming, dungeon, atau lainnya.",gets:["Waktu booster sesuai jam yang kamu pilih","Aktivitas pilihanmu","Laporan progres saat sesi berakhir"]},
+ fil:{name:"Oras-oras na Boost",bullets:["Boosting kada oras","Anumang activity na pipiliin mo","Hindi mo na kailangang mag-grind"],desc:"Maglalaro ang booster para sa iyo kada oras, sa activity na pipiliin mo — leveling, farming, dungeons o iba pa.",gets:["Oras ng booster ayon sa pipiliin mo","Ang activity na pinili mo","Progress report pag natapos ang session"]}}},
+{id:"profession-leveling",img:"assets/blacksmith.jpg",alt:"Blacksmith at the forge in WoW Classic",cat:"professions",cats:["professions"],type:"profession",i18n:{
+ en:{name:"Profession Leveling 1–300",bullets:["Any profession","From your current skill to 300","Main and secondary professions"],desc:"We raise the profession you choose from its current skill level up to 300.",gets:["One profession leveled to 300","Starts from your current skill level","Screenshot proof of the finished skill"]},
+ vi:{name:"Cày nghề 1–300",bullets:["Mọi nghề nghiệp","Từ kỹ năng hiện tại lên 300","Nghề chính và nghề phụ"],desc:"Chúng tôi nâng nghề bạn chọn từ mức kỹ năng hiện tại lên 300.",gets:["Một nghề được cày lên 300","Bắt đầu từ mức kỹ năng hiện tại của bạn","Ảnh chụp chứng minh khi hoàn thành"]},
+ id:{name:"Leveling Profesi 1–300",bullets:["Profesi apa pun","Dari skill saat ini ke 300","Profesi utama dan sekunder"],desc:"Kami menaikkan profesi yang kamu pilih dari level skill saat ini hingga 300.",gets:["Satu profesi dinaikkan ke 300","Mulai dari level skill kamu saat ini","Bukti screenshot skill yang selesai"]},
+ fil:{name:"Profession Leveling 1–300",bullets:["Anumang profession","Mula sa current skill mo hanggang 300","Main at secondary professions"],desc:"Itataas namin ang profession na pipiliin mo mula sa current skill level nito hanggang 300.",gets:["Isang profession na i-level hanggang 300","Magsisimula sa current skill level mo","Screenshot proof ng natapos na skill"]}}},
+{id:"gearing",img:"assets/raid-boss.jpg",alt:"Raid boss artwork in World of Warcraft",cat:"gearing",cats:["gearing"],type:"gearing",i18n:{
+ en:{name:"Gearing",bullets:["Pre-raid gear","Or pre-raid BiS gear","Built around your class"],desc:"Gear your character up for raiding: choose standard pre-raid gear or a pre-raid best-in-slot set.",gets:["Gear collected for your class and role","The gear tier you select","Progress updates with screenshots"]},
+ vi:{name:"Lên đồ (Gearing)",bullets:["Đồ pre-raid","Hoặc đồ pre-raid BiS","Theo đúng class của bạn"],desc:"Lên đồ cho nhân vật sẵn sàng đi raid: chọn đồ pre-raid tiêu chuẩn hoặc bộ pre-raid BiS.",gets:["Trang bị thu thập theo class và vai trò của bạn","Cấp độ trang bị bạn chọn","Cập nhật tiến độ kèm ảnh chụp"]},
+ id:{name:"Gearing",bullets:["Gear pre-raid","Atau gear pre-raid BiS","Disesuaikan dengan class-mu"],desc:"Siapkan gear karaktermu untuk raid: pilih gear pre-raid standar atau set pre-raid best-in-slot.",gets:["Gear dikumpulkan untuk class dan role-mu","Tier gear yang kamu pilih","Update progres dengan screenshot"]},
+ fil:{name:"Gearing",bullets:["Pre-raid gear","O pre-raid BiS gear","Ginawa para sa class mo"],desc:"I-gear up ang character mo para sa raiding: pumili ng standard pre-raid gear o pre-raid best-in-slot set.",gets:["Gear na kinolekta para sa class at role mo","Ang gear tier na pipiliin mo","Progress updates na may screenshot"]}}},
+{id:"gold-gear-farming",img:"assets/gold-chest.jpg",alt:"Chest overflowing with gold in World of Warcraft",cat:"gearing",cats:["gearing"],type:"goal",goalKey:"farm",i18n:{
+ en:{name:"Gold & Gear Farming",bullets:["Gold, gear or materials","Farmed to your target amount","Screenshot proof updates"],desc:"Gold, gear or materials farmed to the amount you ask for — tell us the target and we confirm the plan on Discord.",gets:["Farming up to the amount you request","Updates as the total grows","Payment by milestones in USDT"]},
+ vi:{name:"Cày Gold & trang bị",bullets:["Gold, trang bị hoặc nguyên liệu","Cày đến đúng số lượng mục tiêu","Cập nhật bằng ảnh chụp"],desc:"Cày gold, trang bị hoặc nguyên liệu đến số lượng bạn yêu cầu — cho chúng tôi biết mục tiêu và team sẽ xác nhận kế hoạch trên Discord.",gets:["Cày đến số lượng bạn yêu cầu","Cập nhật khi tổng số tăng dần","Thanh toán theo mốc bằng USDT"]},
+ id:{name:"Farming Gold & Gear",bullets:["Gold, gear, atau material","Di-farming sampai jumlah targetmu","Update bukti screenshot"],desc:"Gold, gear, atau material di-farming sampai jumlah yang kamu minta — beri tahu targetnya dan kami konfirmasi rencananya di Discord.",gets:["Farming sampai jumlah yang kamu minta","Update seiring totalnya bertambah","Pembayaran per milestone dalam USDT"]},
+ fil:{name:"Gold & Gear Farming",bullets:["Gold, gear, o materials","Ifa-farm hanggang sa target amount mo","Screenshot proof updates"],desc:"Gold, gear o materials na ifa-farm hanggang sa dami na hihilingin mo — sabihin mo ang target at iko-confirm namin ang plano sa Discord.",gets:["Farming hanggang sa dami na hiniling mo","Updates habang lumalaki ang total","Bayad kada milestone sa USDT"]}}},
+{id:"riding-skill",img:"assets/gryphon.jpg",alt:"Gryphon mount in World of Warcraft",cat:"mounts",cats:["mounts"],type:"riding",i18n:{
+ en:{name:"Riding Skill",bullets:["60% or 100% riding skill","Arranged with the team","Confirmed before any payment"],desc:"Unlock the riding skill tier you choose — 60% or the full 100% — arranged directly with the team.",gets:["The riding skill tier you select","Mount arrangements discussed on Discord","Confirmation before any payment"]},
+ vi:{name:"Kỹ năng cưỡi thú",bullets:["Kỹ năng cưỡi 60% hoặc 100%","Sắp xếp cùng team","Xác nhận trước khi thanh toán"],desc:"Mở cấp kỹ năng cưỡi bạn chọn — 60% hoặc trọn 100% — sắp xếp trực tiếp với team.",gets:["Cấp kỹ năng cưỡi bạn chọn","Việc thú cưỡi trao đổi trên Discord","Xác nhận trước mọi thanh toán"]},
+ id:{name:"Skill Riding",bullets:["Skill riding 60% atau 100%","Diatur bersama tim","Dikonfirmasi sebelum pembayaran"],desc:"Buka tier skill riding yang kamu pilih — 60% atau penuh 100% — diatur langsung dengan tim.",gets:["Tier skill riding yang kamu pilih","Pengaturan mount dibahas di Discord","Konfirmasi sebelum pembayaran apa pun"]},
+ fil:{name:"Riding Skill",bullets:["60% o 100% riding skill","Inaayos kasama ang team","Kumpirmado bago ang anumang bayad"],desc:"I-unlock ang riding skill tier na pipiliin mo — 60% o buong 100% — inaayos nang direkta kasama ang team.",gets:["Ang riding skill tier na pipiliin mo","Mount arrangements na pag-uusapan sa Discord","Kumpirmasyon bago ang anumang bayad"]}}},
+{id:"pvp-rank",img:"assets/pvp-battle.webp",alt:"Classic battle artwork in World of Warcraft",cat:"pvp",cats:["pvp"],type:"goal",goalKey:"pvp",i18n:{
+ en:{name:"PvP Rank",bullets:["Rank progress on PvP servers","Tell us your target rank","Tracked step by step"],desc:"PvP rank progression: tell us where your character stands and the rank you want to reach.",gets:["PvP progress toward your target rank","Regular progress updates","Milestone-based payment in USDT"]},
+ vi:{name:"Hạng PvP",bullets:["Leo hạng trên server PvP","Cho chúng tôi biết hạng mục tiêu","Theo dõi từng bước"],desc:"Leo hạng PvP: cho chúng tôi biết nhân vật của bạn đang ở đâu và hạng bạn muốn đạt.",gets:["Tiến độ PvP hướng tới hạng mục tiêu","Cập nhật tiến độ thường xuyên","Thanh toán theo mốc bằng USDT"]},
+ id:{name:"Rank PvP",bullets:["Progres rank di server PvP","Beri tahu rank targetmu","Terpantau langkah demi langkah"],desc:"Progres rank PvP: beri tahu kami posisi karaktermu dan rank yang ingin kamu capai.",gets:["Progres PvP menuju rank targetmu","Update progres secara berkala","Pembayaran berbasis milestone dalam USDT"]},
+ fil:{name:"PvP Rank",bullets:["Rank progress sa PvP servers","Sabihin mo ang target rank mo","Naka-track bawat hakbang"],desc:"PvP rank progression: sabihin mo sa amin kung nasaan ang character mo at ang rank na gusto mong maabot.",gets:["PvP progress patungo sa target rank mo","Regular na progress updates","Milestone-based na bayad sa USDT"]}}},
+{id:"reputation-farm",img:"assets/stormwind-keyart.jpg",alt:"Stormwind City key art",cat:"reputations",cats:["reputations"],type:"goal",goalKey:"rep",i18n:{
+ en:{name:"Reputation Farm",bullets:["Any faction reputation","Tell us your target standing","Steady, tracked progress"],desc:"Reputation farming for the faction you choose — tell us your current and target standing.",gets:["Reputation gains with your chosen faction","Progress toward the standing you set","Screenshot updates along the way"]},
+ vi:{name:"Cày danh vọng",bullets:["Danh vọng mọi phe phái","Cho biết mức danh vọng mục tiêu","Tiến độ đều đặn, có theo dõi"],desc:"Cày danh vọng cho phe phái bạn chọn — cho chúng tôi biết mức hiện tại và mức mục tiêu của bạn.",gets:["Tăng danh vọng với phe phái bạn chọn","Tiến độ hướng tới mức bạn đặt ra","Cập nhật ảnh chụp trong quá trình"]},
+ id:{name:"Farm Reputasi",bullets:["Reputasi faksi apa pun","Beri tahu standing targetmu","Progres stabil dan terpantau"],desc:"Farming reputasi untuk faksi yang kamu pilih — beri tahu kami standing kamu saat ini dan targetnya.",gets:["Kenaikan reputasi dengan faksi pilihanmu","Progres menuju standing yang kamu tetapkan","Update screenshot di sepanjang jalan"]},
+ fil:{name:"Reputation Farm",bullets:["Anumang faction reputation","Sabihin mo ang target standing mo","Matatag at naka-track na progress"],desc:"Reputation farming para sa faction na pipiliin mo — sabihin mo sa amin ang current at target standing mo.",gets:["Reputation gains sa faction na pinili mo","Progress patungo sa standing na itinakda mo","Screenshot updates sa daan"]}}},
+{id:"raid-boost",img:"assets/ragnaros.webp",alt:"Ragnaros in Molten Core, World of Warcraft Classic",cat:"raids",cats:["raids"],type:"goal",goalKey:"raid",i18n:{
+ en:{name:"Raid Boost",bullets:["Classic raid content","Tell us your goal","Experienced team"],desc:"Help with classic raid content. Describe your goal and the team will plan the order with you on Discord.",gets:["Raid help arranged around your goal","Coordination directly with the team","Progress proof after each step"]},
+ vi:{name:"Boost Raid",bullets:["Nội dung raid classic","Cho chúng tôi biết mục tiêu","Team giàu kinh nghiệm"],desc:"Hỗ trợ nội dung raid classic. Mô tả mục tiêu của bạn và team sẽ lên kế hoạch đơn cùng bạn trên Discord.",gets:["Hỗ trợ raid sắp xếp theo mục tiêu của bạn","Phối hợp trực tiếp với team","Chứng minh tiến độ sau từng bước"]},
+ id:{name:"Boost Raid",bullets:["Konten raid klasik","Beri tahu targetmu","Tim berpengalaman"],desc:"Bantuan untuk konten raid klasik. Jelaskan targetmu dan tim akan merencanakan pesanan bersamamu di Discord.",gets:["Bantuan raid diatur sesuai targetmu","Koordinasi langsung dengan tim","Bukti progres setelah setiap langkah"]},
+ fil:{name:"Raid Boost",bullets:["Classic raid content","Sabihin mo ang goal mo","Experienced na team"],desc:"Tulong sa classic raid content. Ilarawan ang goal mo at iplano ng team ang order kasama ka sa Discord.",gets:["Raid help na inaayos ayon sa goal mo","Direktang koordinasyon kasama ang team","Progress proof pagkatapos ng bawat hakbang"]}}},
+{id:"quest-completion",img:"assets/stormwind-keyart.jpg",alt:"Stormwind City key art",cat:"custom",cats:["custom","powerleveling"],type:"goal",goalKey:"quest",i18n:{
+ en:{name:"Quest Completion",bullets:["Quest chains and zones","Tell us what is missing","Screenshots on completion"],desc:"Stuck on a quest chain or a whole zone? Tell us what you need finished and we will handle it.",gets:["The quests or zone you describe, completed","Screenshot proof when done","Direct contact with the team throughout"]},
+ vi:{name:"Hoàn thành nhiệm vụ",bullets:["Chuỗi nhiệm vụ và khu vực","Cho biết phần còn thiếu","Ảnh chụp khi hoàn thành"],desc:"Đang kẹt ở một chuỗi nhiệm vụ hay cả một khu vực? Cho chúng tôi biết bạn cần hoàn thành gì.",gets:["Nhiệm vụ hoặc khu vực bạn mô tả, được hoàn thành","Ảnh chụp chứng minh khi xong","Liên hệ trực tiếp với team trong suốt quá trình"]},
+ id:{name:"Penyelesaian Quest",bullets:["Rangkaian quest dan zona","Beri tahu apa yang kurang","Screenshot saat selesai"],desc:"Terjebak di rangkaian quest atau satu zona? Beri tahu kami apa yang perlu diselesaikan dan kami akan mengurusnya.",gets:["Quest atau zona yang kamu jelaskan, diselesaikan","Bukti screenshot saat selesai","Kontak langsung dengan tim sepanjang proses"]},
+ fil:{name:"Pagkumpleto ng Quest",bullets:["Quest chains at zones","Sabihin mo kung ano ang kulang","Screenshots pag natapos"],desc:"Na-stuck sa quest chain o sa buong zone? Sabihin mo sa amin kung ano ang kailangang tapusin at kami na ang bahala.",gets:["Ang mga quest o zone na inilarawan mo, natapos","Screenshot proof pag tapos na","Direktang contact sa team sa buong proseso"]}}},
+{id:"custom-order",img:"assets/hero.webp",alt:"The Dark Portal",cat:"custom",cats:["custom"],type:"goal",goalKey:"custom",i18n:{
+ en:{name:"Custom Order",bullets:["Anything not listed","Describe your goal","Planned together on Discord"],desc:"Something else in mind? Describe it and we will talk it through and plan it together on Discord.",gets:["A plan built around your request","A clear agreement before payment","Progress tracked step by step"]},
+ vi:{name:"Đơn theo yêu cầu",bullets:["Mọi nhu cầu chưa có trong danh sách","Mô tả mục tiêu của bạn","Lên kế hoạch cùng nhau trên Discord"],desc:"Bạn có yêu cầu khác? Mô tả cho chúng tôi và cùng trao đổi, lên kế hoạch trên Discord.",gets:["Kế hoạch xây dựng quanh yêu cầu của bạn","Thống nhất rõ ràng trước khi thanh toán","Tiến độ được theo dõi từng bước"]},
+ id:{name:"Pesanan Khusus",bullets:["Apa pun yang belum tercantum","Jelaskan targetmu","Direncanakan bersama di Discord"],desc:"Ada permintaan lain? Jelaskan saja dan kita bahas serta rencanakan bersama di Discord.",gets:["Rencana yang dibangun di sekitar permintaanmu","Kesepakatan yang jelas sebelum pembayaran","Progres terpantau langkah demi langkah"]},
+ fil:{name:"Custom Order",bullets:["Anumang hindi nakalista","Ilarawan ang goal mo","Sama-samang iplano sa Discord"],desc:"May iba ka bang nasa isip? Ilarawan mo lang at pag-uusapan natin at iplano nang magkasama sa Discord.",gets:["Planong ginawa ayon sa request mo","Malinaw na kasunduan bago ang bayad","Progress na naka-track bawat hakbang"]}}}
+];
+
+/* ---- Dungeon Bundle extra content (reference-page structure, options only) ---- */
+var DUNGEON_EXTRA = {
+en:{req_t:"Requirements",req_d:"Dungeon",req_l:"Levels",more_t:"More info",
+ more_p:"Three completion methods are available. Self-play: you play your own character alongside the booster team. Piloted: a booster plays your character for you, with screenshot proof sent as the runs progress. Self-play Remote: you keep control of your character while a booster guides you through each run in real time. Pick the method that suits you in the options — the team confirms the schedule with you on Discord before anything starts.",
+ gets:["Your selected dungeons, cleared","Dungeon quests completed during the runs","XP gained from mobs and bosses","Loot and gear that drop from bosses","All loot and resources from the runs are kept on your character"],
+ d_pick:"Choose dungeons",d_by_tier:"By level tier",d_specific:"Specific dungeons",
+ loot_t:"Loot options",loot_group:"Group loot",loot_priority:"Loot priority",
+ method_t:"Completion method",method_self:"Self-play",method_piloted:"Piloted",method_remote:"Self-play Remote",
+ s_dungeons:"Dungeons",s_loot:"Loot",s_method:"Method"},
+vi:{req_t:"Yêu cầu",req_d:"Dungeon",req_l:"Cấp độ",more_t:"Thông tin thêm",
+ more_p:"Có ba phương thức hoàn thành. Tự chơi (Self-play): bạn tự điều khiển nhân vật của mình cùng đội booster. Piloted: booster chơi thay nhân vật của bạn, kèm ảnh chụp chứng minh gửi trong quá trình chạy. Self-play Remote: bạn vẫn giữ quyền điều khiển nhân vật trong khi booster hướng dẫn bạn qua từng lượt chạy theo thời gian thực. Chọn phương thức phù hợp trong phần tùy chọn — team sẽ xác nhận lịch với bạn trên Discord trước khi bắt đầu.",
+ gets:["Các dungeon bạn chọn, được hoàn thành","Nhiệm vụ dungeon hoàn thành trong các lượt chạy","XP nhận từ quái và boss","Loot và trang bị rơi từ boss","Toàn bộ loot và tài nguyên từ các lượt chạy được giữ lại trên nhân vật của bạn"],
+ d_pick:"Chọn dungeon",d_by_tier:"Theo nhóm cấp",d_specific:"Dungeon cụ thể",
+ loot_t:"Tùy chọn loot",loot_group:"Loot theo nhóm",loot_priority:"Ưu tiên loot",
+ method_t:"Phương thức hoàn thành",method_self:"Tự chơi",method_piloted:"Piloted (booster chơi thay)",method_remote:"Self-play Remote",
+ s_dungeons:"Dungeon",s_loot:"Loot",s_method:"Phương thức"},
+id:{req_t:"Persyaratan",req_d:"Dungeon",req_l:"Level",more_t:"Info lainnya",
+ more_p:"Ada tiga metode penyelesaian. Self-play: kamu memainkan karaktermu sendiri bersama tim booster. Piloted: booster memainkan karaktermu untukmu, dengan bukti screenshot yang dikirim seiring run berjalan. Self-play Remote: kamu tetap memegang kendali karaktermu sementara booster memandumu melalui setiap run secara real time. Pilih metode yang cocok untukmu di opsi — tim mengonfirmasi jadwal bersamamu di Discord sebelum apa pun dimulai.",
+ gets:["Dungeon pilihanmu, diselesaikan","Quest dungeon yang diselesaikan selama run","XP yang didapat dari mob dan boss","Loot dan gear yang jatuh dari boss","Semua loot dan sumber daya dari run tetap di karaktermu"],
+ d_pick:"Pilih dungeon",d_by_tier:"Berdasarkan tier level",d_specific:"Dungeon tertentu",
+ loot_t:"Opsi loot",loot_group:"Group loot",loot_priority:"Prioritas loot",
+ method_t:"Metode penyelesaian",method_self:"Self-play",method_piloted:"Piloted",method_remote:"Self-play Remote",
+ s_dungeons:"Dungeon",s_loot:"Loot",s_method:"Metode"},
+fil:{req_t:"Mga requirement",req_d:"Dungeon",req_l:"Levels",more_t:"Karagdagang impormasyon",
+ more_p:"May tatlong completion methods. Self-play: ikaw ang maglalaro ng character mo kasama ang booster team. Piloted: booster ang maglalaro ng character mo para sa iyo, may screenshot proof na ipinapadala habang tumatakbo ang runs. Self-play Remote: ikaw pa rin ang may control sa character mo habang ginagabayan ka ng booster sa bawat run nang real time. Piliin ang method na bagay sa iyo sa mga option — iko-confirm ng team ang schedule kasama ka sa Discord bago magsimula ang anuman.",
+ gets:["Ang mga dungeon na pinili mo, natapos","Dungeon quests na natapos habang tumatakbo ang runs","XP na nakuha mula sa mobs at bosses","Loot at gear na nahuhulog mula sa bosses","Lahat ng loot at resources mula sa runs ay mananatili sa character mo"],
+ d_pick:"Pumili ng dungeons",d_by_tier:"Ayon sa level tier",d_specific:"Mga partikular na dungeon",
+ loot_t:"Loot options",loot_group:"Group loot",loot_priority:"Loot priority",
+ method_t:"Completion method",method_self:"Self-play",method_piloted:"Piloted",method_remote:"Self-play Remote",
+ s_dungeons:"Dungeons",s_loot:"Loot",s_method:"Method"}
+};
+Object.keys(DUNGEON_EXTRA).forEach(function(l){ Object.assign(I18N[l], DUNGEON_EXTRA[l]); });
+
+var DUNGEONS = [
+["Ragefire Chasm","13–18"],["Hall of Thanes","13–18"],["Ruins of Lordaeron","15–20"],["Deadmines","17–26"],
+["Wailing Caverns","17–24"],["Shadowfang Keep","22–30"],["Blackfathom Deeps","24–32"],["The Stockade","24–32"],
+["Excavation Site","24–29"],["Gnomeregan","29–38"],["Razorfen Kraul","29–38"],["Scarlet Monastery","29–45"],
+["City of Dalaran","20–35"],["Razorfen Downs","37–46"],["The Drowned City","35–40"],["Uldaman","41–51"],
+["Zul'Farrak","42–54"],["Maraudon","46–55"],["Alcaz Prison","48–53"],["Temple of Atal'Hakkar","50–60"],
+["Blackrock Depths","52–60"],["Krol'dok Stronghold","40–55"],["Lower Blackrock Spire","55–60"],["Dire Maul","55–60"],
+["Blackmaw Hold","55–60"],["Scholomance","58–60"],["Stratholme","58–60"],["Upper Blackrock Spire","58–60"],
+["The Shapers Terrace","58–60"]
+];
+var TIERS = ["14–20 Horde","14–20 Alliance","22–26 Horde","22–26 Alliance","27–32","35–40","40–46","46–52","54–58","58–60"];
+
+/* ================= state & helpers ================= */
+var lang = "en";
+var state = {
+  cat:"all", query:"", product:null,
+  current:"", target:"", prof1:"", prof2:"", secondary:[], extras:[],
+  cls:"", faction:"", ruleset:"", profession:"", skill:"",
+  riding:"", runs:"", hours:"", activity:"", goal:"", gear:"",
+  dungeonMode:"tier", tiers:[], dungeons:[], loot:"", method:"",
+  chars:1, speed:"standard", share:false, notes:""
+};
+var copyMsg = "";
+function t(k){ return (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k; }
+function dx(k){ return t(k); }
+function el(tag, cls, text){
+  var e = document.createElement(tag);
+  if(cls) e.className = cls;
+  if(text != null) e.textContent = text;
+  return e;
+}
+function pData(p){ return p.i18n[lang] || p.i18n.en; }
+function pName(p){ return pData(p).name; }
+function findProduct(id){ for(var i=0;i<PRODUCTS.length;i++) if(PRODUCTS[i].id===id) return PRODUCTS[i]; return null; }
+function toggleArr(arr, v){ var i = arr.indexOf(v); if(i>=0) arr.splice(i,1); else arr.push(v); }
+
+/* ================= sidebar ================= */
+var sideList = document.getElementById("sideList");
+function catCount(c){ if(c==="all") return PRODUCTS.length; var n=0; PRODUCTS.forEach(function(p){ if(p.cats.indexOf(c)>=0) n++; }); return n; }
+function renderSidebar(){
+  sideList.innerHTML = "";
+  CATEGORIES.forEach(function(c){
+    var b = el("button",null);
+    b.type = "button";
+    b.setAttribute("aria-pressed", state.cat===c ? "true":"false");
+    b.appendChild(el("span",null,t("cat_"+c)));
+    b.appendChild(el("span","cnt",String(catCount(c))));
+    b.addEventListener("click", function(){ state.cat = c; state.query=""; document.getElementById("searchInput").value=""; renderSidebar(); renderCatalog(); });
+    sideList.appendChild(b);
+  });
+}
+
+/* ================= catalog ================= */
+var catalogMain = document.getElementById("catalogMain");
+function productCard(p){
+  var d = pData(p);
+  var card = el("button","p-card"); card.type="button";
+  var img = el("img","art"); img.src=p.img; img.alt=p.alt; img.loading="lazy";
+  card.appendChild(img);
+  var badge = el("img","fox-badge"); badge.src="assets/logo.png"; badge.alt=""; badge.loading="lazy";
+  card.appendChild(badge);
+  var body = el("div","cbody");
+  body.appendChild(el("h3",null,d.name));
+  var ul = el("ul");
+  d.bullets.forEach(function(x){ ul.appendChild(el("li",null,x)); });
+  body.appendChild(ul);
+  var foot = el("div","cfoot");
+  var ob = el("span","order-btn",t("order_btn"));
+  foot.appendChild(ob); body.appendChild(foot);
+  card.appendChild(body);
+  card.addEventListener("click", function(){ openProduct(p.id); });
+  return card;
+}
+function sectionEl(title, list){
+  var s = el("div","cat-section");
+  s.appendChild(el("h2",null,title));
+  var g = el("div","card-grid");
+  list.forEach(function(p){ g.appendChild(productCard(p)); });
+  s.appendChild(g);
+  return s;
+}
+function renderCatalog(){
+  catalogMain.innerHTML = "";
+  var q = state.query.trim().toLowerCase();
+  if(q){
+    var res = PRODUCTS.filter(function(p){
+      var d = pData(p), e = p.i18n.en;
+      var hay = (d.name+" "+e.name+" "+d.bullets.join(" ")).toLowerCase();
+      return hay.indexOf(q) >= 0;
+    });
+    if(!res.length){ catalogMain.appendChild(el("div","no-results",t("no_results"))); return; }
+    catalogMain.appendChild(sectionEl(t("sec_results"), res));
+    return;
+  }
+  if(state.cat !== "all"){
+    var list = PRODUCTS.filter(function(p){ return p.cats.indexOf(state.cat)>=0; });
+    catalogMain.appendChild(sectionEl(t("cat_"+state.cat), list));
+    return;
+  }
+  var feat = PRODUCTS.filter(function(p){ return p.featured; });
+  catalogMain.appendChild(sectionEl(t("sec_top"), feat));
+  CATEGORIES.slice(1).forEach(function(c){
+    var list = PRODUCTS.filter(function(p){ return p.cat===c; });
+    if(list.length) catalogMain.appendChild(sectionEl(t("cat_"+c), list));
+  });
+}
+
+/* ================= detail: left column ================= */
+var detailLeft = document.getElementById("detailLeft");
+function renderDetailLeft(p){
+  detailLeft.innerHTML = "";
+  var d = pData(p);
+  var banner = el("div","d-banner");
+  var img = el("img"); img.src=p.img; img.alt=p.alt; banner.appendChild(img);
+  var tags = el("div","d-tags");
+  d.bullets.slice(0,3).forEach(function(x){ tags.appendChild(el("span",null,x)); });
+  banner.appendChild(tags);
+  detailLeft.appendChild(banner);
+  var flex = el("div","d-flex");
+  flex.appendChild(el("b",null,t("flex_t")));
+  flex.appendChild(el("span",null,t("flex_d")));
+  detailLeft.appendChild(flex);
+
+  detailLeft.appendChild(el("h2",null,t("desc_t")));
+  detailLeft.appendChild(el("p","desc",d.desc));
+
+  detailLeft.appendChild(el("h2",null,t("get_t")));
+  var gets = (p.id==="dungeon-bundle") ? I18N[lang].gets || I18N.en.gets : d.gets;
+  var gl = el("ul","get-list");
+  gets.forEach(function(g,i){
+    var li = el("li");
+    li.appendChild(el("span","n",String(i+1)));
+    li.appendChild(el("span",null,g));
+    gl.appendChild(li);
+  });
+  detailLeft.appendChild(gl);
+
+  if(p.id==="dungeon-bundle"){
+    detailLeft.appendChild(el("h2",null,dx("req_t")));
+    var table = el("table","req-table");
+    var thead = el("thead"); var tr = el("tr");
+    tr.appendChild(el("th",null,dx("req_d"))); tr.appendChild(el("th",null,dx("req_l")));
+    thead.appendChild(tr); table.appendChild(thead);
+    var tb = el("tbody");
+    DUNGEONS.forEach(function(dn){
+      var r = el("tr");
+      r.appendChild(el("td",null,dn[0])); r.appendChild(el("td",null,dn[1]));
+      tb.appendChild(r);
+    });
+    table.appendChild(tb);
+    detailLeft.appendChild(table);
+    detailLeft.appendChild(el("h2",null,dx("more_t")));
+    detailLeft.appendChild(el("p","desc",dx("more_p")));
+  }
+
+  detailLeft.appendChild(el("h2",null,t("addons_t")));
+  var al = el("ul","addon-list");
+  ["addon_speed","addon_share","addon_extra","addon_notes"].forEach(function(k){
+    var li = el("li",null,t(k)); al.appendChild(li);
+  });
+  detailLeft.appendChild(al);
+}
+
+/* ================= detail: form ================= */
+var formPanel = document.getElementById("formPanel");
+function fieldWrap(labelText){
+  var w = el("div","field");
+  w.appendChild(el("label",null,labelText));
+  return w;
+}
+function selectField(labelText, options, current, onChange, firstLabel){
+  var w = fieldWrap(labelText);
+  var sel = el("select"); sel.setAttribute("aria-label", labelText);
+  if(firstLabel != null){ var o0 = el("option",null,firstLabel); o0.value=""; sel.appendChild(o0); }
+  options.forEach(function(o){
+    var oEl = el("option",null,o.label); oEl.value=o.value;
+    if(current===o.value) oEl.selected = true;
+    sel.appendChild(oEl);
+  });
+  sel.addEventListener("change", function(){ onChange(sel.value); });
+  w.appendChild(sel);
+  return w;
+}
+function segField(labelText, options, current, onPick){
+  var w = el("div","field");
+  w.appendChild(el("span","flabel",labelText));
+  var seg = el("div","seg");
+  options.forEach(function(o){
+    var b = el("button",null,o.label); b.type="button";
+    if(o.cls) b.className = o.cls;
+    b.setAttribute("aria-pressed", current===o.value ? "true":"false");
+    b.addEventListener("click", function(){ onPick(o.value); });
+    seg.appendChild(b);
+  });
+  w.appendChild(seg);
+  return w;
+}
+function checkListField(labelText, options, selectedArr, onToggle){
+  var w = el("div","field");
+  w.appendChild(el("span","flabel",labelText));
+  var list = el("div","check-list");
+  options.forEach(function(o){
+    var on = selectedArr.indexOf(o.value)>=0;
+    var b = el("button","check-row"); b.type="button";
+    b.setAttribute("role","checkbox"); b.setAttribute("aria-checked", on?"true":"false");
+    b.appendChild(el("span","box", on?"✓":""));
+    b.appendChild(el("span",null,o.label));
+    b.addEventListener("click", function(){ onToggle(o.value); });
+    list.appendChild(b);
+  });
+  w.appendChild(list);
+  return w;
+}
+function radioField(labelText, options, current, onPick, rowCls){
+  var w = el("div","field");
+  w.appendChild(el("span","flabel",labelText));
+  var list = el("div","check-list");
+  options.forEach(function(o){
+    var on = current===o.value;
+    var b = el("button", rowCls||"radio-row"); b.type="button";
+    b.setAttribute("role","radio"); b.setAttribute("aria-checked", on?"true":"false");
+    b.appendChild(el("span","radio-dot"));
+    b.appendChild(el("span",null,o.label));
+    b.addEventListener("click", function(){ onPick(o.value); });
+    list.appendChild(b);
+  });
+  w.appendChild(list);
+  return w;
+}
+function rerender(){ var p = findProduct(state.product); if(p){ renderForm(p); renderPanel(p); } }
+function validateLevels(){
+  if(state.product==null) return;
+  var p = findProduct(state.product); if(!p || p.type!=="leveling") return;
+  var it = document.getElementById("targetInput"); if(!it) return;
+  var wrap = it.closest(".field");
+  var c = parseInt(state.current,10), tg = parseInt(state.target,10);
+  var bad = false;
+  if(!isNaN(c) && !isNaN(tg) && (tg<=c || tg>60 || c<1)) bad = true;
+  if(!isNaN(tg) && tg>60) bad = true;
+  wrap.classList.toggle("invalid", bad);
+}
+function validateSkill(){
+  var it = document.getElementById("skillInput"); if(!it) return;
+  var wrap = it.closest(".field");
+  var v = parseInt(state.skill,10);
+  var bad = state.skill!=="" && (isNaN(v) || v<0 || v>299);
+  wrap.classList.toggle("invalid", bad);
+}
+function renderForm(p){
+  formPanel.innerHTML = "";
+  /* ruleset */
+  formPanel.appendChild(selectField(t("f_ruleset"),
+    RULESETS.map(function(r){ return {value:r.v, label:t(r.k)}; }),
+    state.ruleset, function(v){ state.ruleset=v; rerenderSoft(); }, null));
+  if(!state.ruleset) state.ruleset = "Normal";
+
+  if(p.type==="leveling"){
+    var two = el("div","two-col");
+    var fc = fieldWrap(t("f_current"));
+    var ic = el("input"); ic.type="number"; ic.min="1"; ic.max="59"; ic.inputMode="numeric"; ic.placeholder="1–59"; ic.value=state.current; ic.setAttribute("aria-label",t("f_current"));
+    var rc = el("input","lvl-range"); rc.type="range"; rc.min="1"; rc.max="59"; rc.step="1"; rc.value=(state.current===""?"1":state.current); rc.setAttribute("aria-label",t("f_current"));
+    ic.addEventListener("input", function(){ state.current=ic.value; if(ic.value!=="") rc.value=ic.value; validateLevels(); renderPanel(p); });
+    rc.addEventListener("input", function(){ state.current=rc.value; ic.value=rc.value; validateLevels(); renderPanel(p); });
+    fc.appendChild(ic); fc.appendChild(rc); two.appendChild(fc);
+    var ft = fieldWrap(t("f_target"));
+    var it = el("input"); it.type="number"; it.min="2"; it.max="60"; it.inputMode="numeric"; it.placeholder="2–60"; it.value=state.target; it.id="targetInput"; it.setAttribute("aria-label",t("f_target"));
+    var rt = el("input","lvl-range"); rt.type="range"; rt.min="2"; rt.max="60"; rt.step="1"; rt.value=(state.target===""?"60":state.target); rt.setAttribute("aria-label",t("f_target"));
+    it.addEventListener("input", function(){ state.target=it.value; if(it.value!=="") rt.value=it.value; validateLevels(); renderPanel(p); });
+    rt.addEventListener("input", function(){ state.target=rt.value; it.value=rt.value; validateLevels(); renderPanel(p); });
+    ft.appendChild(it); ft.appendChild(rt); ft.appendChild(el("p","error",t("err_level")));
+    two.appendChild(ft); formPanel.appendChild(two);
+
+    var profOpts = [{value:"", label:t("prof_none")}].concat(PROFESSIONS_MAIN.map(function(x){ return {value:x,label:x}; }));
+    formPanel.appendChild(selectField(t("f_prof1"), profOpts, state.prof1, function(v){ state.prof1=v; renderPanel(p); }, null));
+    formPanel.appendChild(selectField(t("f_prof2"), profOpts, state.prof2, function(v){ state.prof2=v; renderPanel(p); }, null));
+    formPanel.appendChild(checkListField(t("f_secondary"),
+      SECONDARY.map(function(x){ return {value:x,label:x}; }), state.secondary,
+      function(v){ toggleArr(state.secondary,v); rerender(); }));
+    formPanel.appendChild(checkListField(t("f_extras"),
+      EXTRAS.map(function(x){ return {value:x.v,label:t(x.k)}; }), state.extras,
+      function(v){ toggleArr(state.extras,v); rerender(); }));
+  }
+  if(p.type==="dungeons"){
+    formPanel.appendChild(segField(dx("d_pick"),
+      [{value:"tier",label:dx("d_by_tier")},{value:"specific",label:dx("d_specific")}],
+      state.dungeonMode, function(v){ state.dungeonMode=v; rerender(); }));
+    if(state.dungeonMode==="tier"){
+      formPanel.appendChild(checkListField(dx("d_by_tier"),
+        TIERS.map(function(x){ return {value:x,label:x}; }), state.tiers,
+        function(v){ toggleArr(state.tiers,v); rerender(); }));
+    } else {
+      var dw = el("div","field");
+      dw.appendChild(el("span","flabel",dx("d_specific")));
+      var dlist = el("div","dungeon-pick");
+      DUNGEONS.forEach(function(dn){
+        var on = state.dungeons.indexOf(dn[0])>=0;
+        var b = el("button","check-row"); b.type="button";
+        b.setAttribute("role","checkbox"); b.setAttribute("aria-checked", on?"true":"false");
+        b.appendChild(el("span","box", on?"✓":""));
+        var nm = el("span",null,dn[0]); nm.style.flex="1";
+        b.appendChild(nm); b.appendChild(el("span","dlvl",dn[1]));
+        b.addEventListener("click", function(){ toggleArr(state.dungeons, dn[0]); rerender(); });
+        dlist.appendChild(b);
+      });
+      dw.appendChild(dlist);
+      formPanel.appendChild(dw);
+    }
+    formPanel.appendChild(radioField(dx("loot_t"),
+      [{value:"group",label:dx("loot_group")},{value:"priority",label:dx("loot_priority")}],
+      state.loot, function(v){ state.loot=v; rerender(); }));
+    formPanel.appendChild(radioField(dx("method_t"),
+      [{value:"self",label:dx("method_self")},{value:"piloted",label:dx("method_piloted")},{value:"remote",label:dx("method_remote")}],
+      state.method, function(v){ state.method=v; rerender(); }));
+    var fr = fieldWrap(t("f_runs"));
+    var ir = el("input"); ir.type="number"; ir.min="1"; ir.inputMode="numeric"; ir.placeholder="1"; ir.value=state.runs; ir.setAttribute("aria-label",t("f_runs"));
+    ir.addEventListener("input", function(){ state.runs=ir.value; renderPanel(p); });
+    fr.appendChild(ir); formPanel.appendChild(fr);
+  }
+  if(p.type==="profession"){
+    formPanel.appendChild(selectField(t("f_profession"),
+      PROFESSIONS_ALL.map(function(x){ return {value:x,label:x}; }),
+      state.profession, function(v){ state.profession=v; renderPanel(p); }, t("f_profession")));
+    var two2 = el("div","two-col");
+    var fs = fieldWrap(t("f_skill_cur"));
+    var is = el("input"); is.type="number"; is.min="0"; is.max="299"; is.inputMode="numeric"; is.placeholder="0–299"; is.value=state.skill; is.id="skillInput"; is.setAttribute("aria-label",t("f_skill_cur"));
+    is.addEventListener("input", function(){ state.skill=is.value; validateSkill(); renderPanel(p); });
+    fs.appendChild(is); fs.appendChild(el("p","error",t("err_skill")));
+    two2.appendChild(fs);
+    var ftg = fieldWrap(t("f_skill_target"));
+    var fx = el("div","fixed-target"); fx.appendChild(el("span",null,"→")); fx.appendChild(document.createTextNode("300"));
+    ftg.appendChild(fx); two2.appendChild(ftg);
+    formPanel.appendChild(two2);
+  }
+  if(p.type==="riding"){
+    formPanel.appendChild(segField(t("f_riding"),
+      [{value:"60",label:t("ride60")},{value:"100",label:t("ride100")}],
+      state.riding, function(v){ state.riding=v; rerender(); }));
+  }
+  if(p.type==="hourly"){
+    var fh = fieldWrap(t("f_hours"));
+    var ih = el("input"); ih.type="number"; ih.min="1"; ih.inputMode="numeric"; ih.placeholder="1"; ih.value=state.hours; ih.setAttribute("aria-label",t("f_hours"));
+    ih.addEventListener("input", function(){ state.hours=ih.value; renderPanel(p); });
+    fh.appendChild(ih); formPanel.appendChild(fh);
+    var fa = fieldWrap(t("f_activity"));
+    var ta = el("textarea"); ta.placeholder=t("f_activity_ph"); ta.value=state.activity; ta.setAttribute("aria-label",t("f_activity"));
+    ta.addEventListener("input", function(){ state.activity=ta.value; renderPanel(p); });
+    fa.appendChild(ta); formPanel.appendChild(fa);
+  }
+  if(p.type==="gearing"){
+    formPanel.appendChild(radioField(t("f_gear"),
+      [{value:"pre",label:t("gear_pre")},{value:"bis",label:t("gear_bis")}],
+      state.gear, function(v){ state.gear=v; rerender(); }));
+  }
+  if(p.type==="goal"){
+    var fg = fieldWrap(t("f_goal"));
+    var tg = el("textarea"); tg.placeholder=t("f_goal_ph"); tg.value=state.goal; tg.setAttribute("aria-label",t("f_goal"));
+    tg.addEventListener("input", function(){ state.goal=tg.value; renderPanel(p); });
+    fg.appendChild(tg); formPanel.appendChild(fg);
+  }
+
+  /* class + faction */
+  formPanel.appendChild(selectField(t("f_class"),
+    CLASSES.map(function(c){ return {value:c,label:c}; }),
+    state.cls, function(v){ state.cls=v; renderPanel(p); }, t("f_class_ph")));
+  formPanel.appendChild(segField(t("f_faction"),
+    [{value:"Alliance",label:"Alliance",cls:"f-alliance"},{value:"Horde",label:"Horde",cls:"f-horde"}],
+    state.faction, function(v){ state.faction=v; rerender(); }));
+
+  /* notes */
+  var fnn = fieldWrap(t("f_notes"));
+  var tan = el("textarea"); tan.placeholder=t("f_notes_ph"); tan.value=state.notes; tan.setAttribute("aria-label",t("f_notes"));
+  tan.addEventListener("input", function(){ state.notes=tan.value; renderPanel(p); });
+  fnn.appendChild(tan); formPanel.appendChild(fnn);
+
+  validateLevels(); validateSkill();
+}
+function rerenderSoft(){ var p = findProduct(state.product); if(p) renderPanel(p); }
+
+/* ================= summary ================= */
+function summaryRows(){
+  var rows = [];
+  var p = findProduct(state.product); if(!p) return rows;
+  rows.push([t("s_service"), pName(p)]);
+  if(p.type==="leveling"){
+    if(state.current) rows.push([t("s_current"), state.current]);
+    if(state.target) rows.push([t("s_target"), state.target]);
+    if(state.prof1) rows.push([t("s_prof1"), state.prof1]);
+    if(state.prof2) rows.push([t("s_prof2"), state.prof2]);
+    if(state.secondary.length) rows.push([t("s_secondary"), state.secondary.join(", ")]);
+    if(state.extras.length) rows.push([t("s_extras"), state.extras.map(function(v){ var l=v; EXTRAS.forEach(function(x){ if(x.v===v) l=t(x.k); }); return l; }).join(", ")]);
+  }
+  if(p.type==="dungeons"){
+    var picks = state.dungeonMode==="tier" ? state.tiers : state.dungeons;
+    if(picks.length) rows.push([dx("s_dungeons"), picks.join(", ")]);
+    if(state.runs) rows.push([t("s_runs"), state.runs]);
+    if(state.loot) rows.push([dx("s_loot"), dx(state.loot==="group" ? "loot_group" : "loot_priority")]);
+    if(state.method) rows.push([dx("s_method"), dx(state.method==="self" ? "method_self" : state.method==="piloted" ? "method_piloted" : "method_remote")]);
+  }
+  if(p.type==="profession"){
+    if(state.profession) rows.push([t("s_profession"), state.profession]);
+    if(state.skill!=="") rows.push([t("s_skill"), state.skill+" → 300"]);
+  }
+  if(p.type==="riding" && state.riding) rows.push([t("s_riding"), state.riding+"%"]);
+  if(p.type==="hourly"){
+    if(state.hours) rows.push([t("s_hours"), state.hours]);
+    if(state.activity.trim()) rows.push([t("s_request"), state.activity.trim()]);
+  }
+  if(p.type==="gearing" && state.gear) rows.push([t("s_gear"), t(state.gear==="pre" ? "gear_pre" : "gear_bis")]);
+  if(p.type==="goal" && state.goal.trim()) rows.push([t("s_request"), state.goal.trim()]);
+  if(state.cls) rows.push([t("s_class"), state.cls]);
+  if(state.faction) rows.push([t("s_faction"), state.faction]);
+  if(state.ruleset) rows.push([t("s_ruleset"), rulesetLabel(state.ruleset)]);
+  rows.push([t("s_chars"), String(state.chars)]);
+  rows.push([t("s_speed"), t("speed_"+state.speed)]);
+  if(state.share) rows.push([t("s_share"), "+$5"]);
+  if(state.notes.trim()) rows.push([t("s_notes"), state.notes.trim()]);
+  return rows;
+}
+function rulesetLabel(v){ var l=v; RULESETS.forEach(function(r){ if(r.v===v) l=t(r.k); }); return l; }
+function summaryText(){
+  var lines = [t("copy_head")];
+  summaryRows().forEach(function(r){ lines.push(r[0]+": "+r[1]); });
+  return lines.join("\n");
+}
+
+/* ================= order panel ================= */
+var orderPanel = document.getElementById("orderPanel");
+var DISCORD_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.32 4.37a19.8 19.8 0 0 0-4.93-1.51 13.78 13.78 0 0 0-.64 1.28 18.27 18.27 0 0 0-5.5 0 13.78 13.78 0 0 0-.64-1.28c-1.71.29-3.37.8-4.93 1.51A20.3 20.3 0 0 0 .1 18.06a19.9 19.9 0 0 0 6.07 3.03c.49-.66.93-1.37 1.3-2.1a12.9 12.9 0 0 1-2.05-.98c.17-.12.34-.25.5-.38a14.2 14.2 0 0 0 12.16 0c.16.13.33.26.5.38-.65.38-1.34.71-2.05.98.37.73.81 1.44 1.3 2.1a19.9 19.9 0 0 0 6.07-3.03 20.3 20.3 0 0 0-3.58-13.69ZM8.02 15.33c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.95-2.42 2.16-2.42 1.21 0 2.18 1.09 2.16 2.42 0 1.34-.95 2.42-2.16 2.42Zm7.96 0c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.95-2.42 2.16-2.42 1.21 0 2.18 1.09 2.16 2.42 0 1.34-.94 2.42-2.16 2.42Z"/></svg>';
+function renderPanel(p){
+  orderPanel.innerHTML = "";
+  var brand = el("div","op-brand");
+  var bimg = el("img"); bimg.src="assets/logo.png"; bimg.alt="";
+  brand.appendChild(bimg);
+  var btx = el("div");
+  btx.appendChild(el("div","op-bname","GegeTeam — Nhà Cáo"));
+  btx.appendChild(el("div","op-bsub","WoW Forever Boosting"));
+  brand.appendChild(btx);
+  orderPanel.appendChild(brand);
+  orderPanel.appendChild(el("h3",null,t("sum_title")));
+  orderPanel.appendChild(el("p","op-label",t("op_chars")));
+  var st = el("div","stepper");
+  var minus = el("button",null,"−"); minus.type="button"; minus.setAttribute("aria-label","-");
+  if(state.chars<=1) minus.disabled = true;
+  minus.addEventListener("click", function(){ if(state.chars>1){ state.chars--; renderPanel(p);} });
+  var plus = el("button",null,"+"); plus.type="button"; plus.setAttribute("aria-label","+");
+  if(state.chars>=10) plus.disabled = true;
+  plus.addEventListener("click", function(){ if(state.chars<10){ state.chars++; renderPanel(p);} });
+  st.appendChild(minus);
+  var val = el("div","val",String(state.chars)); st.appendChild(val);
+  st.appendChild(plus);
+  orderPanel.appendChild(st);
+
+  orderPanel.appendChild(el("p","op-label",t("op_speed")));
+  var sl = el("div","speed-list");
+  [["standard","speed_standard"],["express","speed_express"],["super","speed_super"]].forEach(function(pair){
+    var on = state.speed===pair[0];
+    var b = el("button","speed-row"); b.type="button";
+    b.setAttribute("role","radio"); b.setAttribute("aria-checked", on?"true":"false");
+    b.appendChild(el("span","radio-dot"));
+    b.appendChild(el("span",null,t(pair[1])));
+    b.addEventListener("click", function(){ state.speed=pair[0]; renderPanel(p); });
+    sl.appendChild(b);
+  });
+  orderPanel.appendChild(sl);
+
+  var shr = el("div","op-share");
+  var stx = el("div");
+  stx.appendChild(el("strong",null,t("share_t")));
+  stx.appendChild(el("span",null,t("share_d")+" · +$5"));
+  shr.appendChild(stx);
+  var sw = el("button","switch"); sw.type="button"; sw.setAttribute("role","switch");
+  sw.setAttribute("aria-checked", state.share?"true":"false"); sw.setAttribute("aria-label",t("share_t"));
+  sw.addEventListener("click", function(){ state.share=!state.share; renderPanel(p); });
+  shr.appendChild(sw);
+  orderPanel.appendChild(shr);
+
+  var sum = el("div","op-sum");
+  var rows = summaryRows();
+  if(rows.length<=3){ sum.appendChild(el("p","empty",t("s_empty"))); }
+  var ul = el("ul");
+  rows.forEach(function(r){
+    var li = el("li");
+    li.appendChild(el("span",null,r[0]));
+    li.appendChild(el("span",null,r[1]));
+    ul.appendChild(li);
+  });
+  sum.appendChild(ul);
+  orderPanel.appendChild(sum);
+
+  var tot = el("div","op-total");
+  tot.appendChild(el("p","t-label",t("total_label")));
+  tot.appendChild(el("p",null,t("total_text")));
+  orderPanel.appendChild(tot);
+  var pay = el("p","op-pay"); pay.innerHTML = "";
+  var pb = el("b",null,"USDT · "); pay.appendChild(pb);
+  pay.appendChild(document.createTextNode(t("sum_payment")));
+  orderPanel.appendChild(pay);
+
+  var copyBtn = el("button","btn btn-copy"); copyBtn.type="button";
+  copyBtn.appendChild(el("span",null,t("copy_btn")));
+  copyBtn.addEventListener("click", doCopy);
+  orderPanel.appendChild(copyBtn);
+  var note = el("p","copy-note",copyMsg); note.id="copyNote"; orderPanel.appendChild(note);
+
+  var cta = el("a","btn btn-green"); cta.href=DISCORD; cta.target="_blank"; cta.rel="noopener";
+  cta.innerHTML = DISCORD_SVG; cta.appendChild(el("span",null,t("discord_cta")));
+  orderPanel.appendChild(cta);
+  var chat = el("a","btn btn-dark"); chat.href=DISCORD; chat.target="_blank"; chat.rel="noopener";
+  chat.appendChild(el("span",null,t("chat_before")));
+  orderPanel.appendChild(chat);
+}
+function doCopy(){
+  var text = summaryText();
+  function done(){ copyMsg = t("copied"); refreshNote(); }
+  function fail(){ copyMsg = t("copy_fail"); refreshNote(); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text) ? done() : fail(); });
+  } else { fallbackCopy(text) ? done() : fail(); }
+}
+function refreshNote(){ var n = document.getElementById("copyNote"); if(n) n.textContent = copyMsg; }
+function fallbackCopy(text){
+  try{
+    var ta = document.createElement("textarea");
+    ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    var ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  }catch(e){ return false; }
+}
+
+/* ================= view switching ================= */
+var catalogView = document.getElementById("catalogView");
+var detailView = document.getElementById("detailView");
+function openProduct(id){
+  state.product = id;
+  state.current=""; state.target=""; state.prof1=""; state.prof2="";
+  state.secondary=[]; state.extras=[]; state.profession=""; state.skill="";
+  state.riding=""; state.runs=""; state.hours=""; state.activity=""; state.goal=""; state.gear="";
+  state.dungeonMode="tier"; state.tiers=[]; state.dungeons=[]; state.loot=""; state.method="";
+  if(!state.ruleset) state.ruleset="Normal";
+  copyMsg = "";
+  var p = findProduct(id);
+  document.getElementById("detailTitle").textContent = pName(p);
+  document.getElementById("crumbCat").textContent = t("cat_"+p.cat);
+  document.getElementById("crumbName").textContent = pName(p);
+  renderDetailLeft(p); renderForm(p); renderPanel(p);
+  catalogView.hidden = true; detailView.hidden = false;
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+function showCatalog(){
+  state.product = null;
+  detailView.hidden = true; catalogView.hidden = false;
+}
+document.getElementById("backBtn").addEventListener("click", function(){ showCatalog(); window.scrollTo({top:0, behavior:"smooth"}); });
+document.getElementById("brandHome").addEventListener("click", function(e){ e.preventDefault(); showCatalog(); window.scrollTo({top:0, behavior:"smooth"}); });
+document.getElementById("searchInput").addEventListener("input", function(e){
+  state.query = e.target.value;
+  if(state.product){ showCatalog(); }
+  renderCatalog();
+});
+
+/* ================= language ================= */
+function applyLang(){
+  document.documentElement.lang = lang;
+  var sg = document.getElementById("sloganText"); if(sg) sg.textContent = SLOGANS[lang] || SLOGANS.en;
+  document.querySelectorAll("[data-i18n]").forEach(function(n){ n.textContent = t(n.getAttribute("data-i18n")); });
+  document.querySelectorAll("[data-i18n-html]").forEach(function(n){ n.innerHTML = t(n.getAttribute("data-i18n-html")); });
+  document.querySelectorAll("[data-i18n-ph]").forEach(function(n){ n.setAttribute("placeholder", t(n.getAttribute("data-i18n-ph"))); });
+  document.querySelectorAll(".lang-switch button").forEach(function(b){
+    b.setAttribute("aria-pressed", b.getAttribute("data-lang")===lang ? "true":"false");
+  });
+  copyMsg = "";
+  renderSidebar(); renderCatalog();
+  if(state.product){
+    var p = findProduct(state.product);
+    document.getElementById("detailTitle").textContent = pName(p);
+    document.getElementById("crumbCat").textContent = t("cat_"+p.cat);
+    document.getElementById("crumbName").textContent = pName(p);
+    renderDetailLeft(p); renderForm(p); renderPanel(p);
+  }
+}
+document.querySelectorAll(".lang-switch button").forEach(function(b){
+  b.addEventListener("click", function(){ lang = b.getAttribute("data-lang"); applyLang(); });
+});
+
+applyLang();
+})();
+</script>
+</body>
+</html>
